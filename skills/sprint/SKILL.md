@@ -1,5 +1,5 @@
 ---
-name: acli-sprint
+name: sprint
 description: List sprints and sprint work items using the Atlassian CLI. Use when the user wants to view sprint data, active sprints, or items in a sprint.
 user-invocable: true
 argument-hint: "[list|items] [options]"
@@ -65,3 +65,7 @@ If the user asks "show me my current sprint items", follow this sequence:
 
 - Present sprint data in a readable format.
 - For sprint items, highlight status distribution (how many To Do / In Progress / Done).
+
+---
+
+For a complete list of subcommands and flags, see [docs/reference.md](../../docs/reference.md#acli-jira-sprint).

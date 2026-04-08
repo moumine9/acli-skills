@@ -1,5 +1,5 @@
 ---
-name: acli-search
+name: search
 description: Search Jira work items, list projects, or find boards using the Atlassian CLI. Use when the user wants to query or browse Jira data.
 user-invocable: true
 argument-hint: "[workitems|projects|boards] [query]"
@@ -68,3 +68,7 @@ acli jira board search [--name "<name>"] [--project "<KEY>"] [--type "<scrum|kan
 - Present results in a readable format.
 - For large result sets, summarize the count and show the most relevant items.
 - Suggest refining the query if too many results are returned.
+
+---
+
+For a complete list of subcommands and flags, see [docs/reference.md](../../docs/reference.md#acli-jira-workitem).

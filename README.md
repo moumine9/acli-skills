@@ -75,10 +75,10 @@ Choose a scope when prompted:
 
 Skills are available as:
 
-- `/acli:acli-auth`
-- `/acli:acli-search`
-- `/acli:acli-sprint`
-- `/acli:acli-workitem`
+- `/acli:auth`
+- `/acli:search`
+- `/acli:sprint`
+- `/acli:workitem`
 
 The auth guard hook activates automatically after install.
 

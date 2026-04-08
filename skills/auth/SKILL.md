@@ -1,5 +1,5 @@
 ---
-name: acli-auth
+name: auth
 description: Manage Atlassian CLI authentication — login, logout, check status, or switch accounts. Use when the user needs to authenticate with Jira or check their auth status.
 user-invocable: true
 disable-model-invocation: true
@@ -68,3 +68,7 @@ acli jira auth status
 ### 4. Output
 
 Report whether the action succeeded and show the currently authenticated site/user.
+
+---
+
+For a complete list of subcommands and flags, see [docs/reference.md](../../docs/reference.md#acli-jira-auth).
