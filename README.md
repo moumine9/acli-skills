@@ -99,13 +99,13 @@ This loads the plugin from the current directory without installing it. Use `/re
 Copy each skill directory into your Claude skills folder:
 
 ```bash
-cp -r skills/acli-auth ~/.claude/skills/
-cp -r skills/acli-search ~/.claude/skills/
-cp -r skills/acli-sprint ~/.claude/skills/
-cp -r skills/acli-workitem ~/.claude/skills/
+cp -r skills/auth ~/.claude/skills/
+cp -r skills/search ~/.claude/skills/
+cp -r skills/sprint ~/.claude/skills/
+cp -r skills/workitem ~/.claude/skills/
 ```
 
-Skills are then available as `/acli-auth`, `/acli-search`, `/acli-sprint`, and `/acli-workitem`.
+Skills are then available as `/auth`, `/search`, `/sprint`, and `/workitem`.
 
 ### Auth guard hook
 
@@ -140,16 +140,19 @@ cp .claude/settings.local.json <your-project>/.claude/settings.local.json
 
 ---
 
-## Reference
+## Reference docs
+
+- [docs/commands.md](docs/commands.md) — all available commands at a glance
+- [docs/reference.md](docs/reference.md) — full reference with flags and examples
 
 ### Skills
 
 | Skill | Plugin trigger | Standalone trigger | Description | Auto-invoked |
 |---|---|---|---|---|
-| acli-auth | `/acli:acli-auth` | `/acli-auth` | Login, logout, check status, or switch Jira accounts | No |
-| acli-search | `/acli:acli-search` | `/acli-search` | Search work items by JQL, list projects, and find boards | Yes |
-| acli-sprint | `/acli:acli-sprint` | `/acli-sprint` | List sprints for a board and show work items in a sprint | Yes |
-| acli-workitem | `/acli:acli-workitem` | `/acli-workitem` | Create, view, edit, transition, assign, or comment on issues | No |
+| auth | `/acli:auth` | `/auth` | Login, logout, check status, or switch Jira and Confluence accounts | No |
+| search | `/acli:search` | `/search` | Search work items by JQL, list projects, boards, filters, and dashboards | Yes |
+| sprint | `/acli:sprint` | `/sprint` | List, create, and update sprints; show work items in a sprint | Yes |
+| workitem | `/acli:workitem` | `/workitem` | Create, view, edit, transition, assign, comment, link, or clone issues | No |
 
 Skills marked "No" use `disable-model-invocation: true` — Claude will not trigger them automatically. `acli-search` and `acli-sprint` are read-only and safe to auto-invoke.
 
