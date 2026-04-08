@@ -77,6 +77,14 @@ Skills are available as:
 
 The auth guard hook activates automatically after install.
 
+## Test locally before installing
+
+```bash
+claude --plugin-dir ./
+```
+
+This loads the plugin from the current directory without installing it. Use `/reload-plugins` to pick up changes without restarting.
+
 ## Manual install
 
 ### Skills
@@ -129,12 +137,14 @@ cp .claude/settings.local.json <your-project>/.claude/settings.local.json
 
 ### Skills
 
-| Skill | Plugin trigger | Standalone trigger | Description |
-|---|---|---|---|
-| acli-auth | `/acli:acli-auth` | `/acli-auth` | Login, logout, check status, or switch Jira accounts |
-| acli-search | `/acli:acli-search` | `/acli-search` | Search work items by JQL, list projects, and find boards |
-| acli-sprint | `/acli:acli-sprint` | `/acli-sprint` | List sprints for a board and show work items in a sprint |
-| acli-workitem | `/acli:acli-workitem` | `/acli-workitem` | Create, view, edit, transition, assign, or comment on issues |
+| Skill | Plugin trigger | Standalone trigger | Description | Auto-invoked |
+|---|---|---|---|---|
+| acli-auth | `/acli:acli-auth` | `/acli-auth` | Login, logout, check status, or switch Jira accounts | No |
+| acli-search | `/acli:acli-search` | `/acli-search` | Search work items by JQL, list projects, and find boards | Yes |
+| acli-sprint | `/acli:acli-sprint` | `/acli-sprint` | List sprints for a board and show work items in a sprint | Yes |
+| acli-workitem | `/acli:acli-workitem` | `/acli-workitem` | Create, view, edit, transition, assign, or comment on issues | No |
+
+Skills marked "No" use `disable-model-invocation: true` — Claude will not trigger them automatically. `acli-search` and `acli-sprint` are read-only and safe to auto-invoke.
 
 ### Hooks
 

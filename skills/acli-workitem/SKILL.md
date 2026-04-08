@@ -2,6 +2,7 @@
 name: acli-workitem
 description: Create, edit, view, transition, assign, or comment on Jira work items using the Atlassian CLI. Use when the user wants to manage Jira issues from the terminal.
 user-invocable: true
+disable-model-invocation: true
 argument-hint: "[create|edit|view|transition|assign|comment] [options]"
 model: haiku
 effort: low
