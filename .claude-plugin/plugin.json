@@ -1,13 +1,13 @@
 {
-  "name": "claude-acli",
+  "name": "acli",
   "description": "Claude Code skills and hooks for Jira — manage work items, sprints, and search via the Atlassian CLI (acli) without leaving your terminal",
   "version": "1.0.0",
   "author": {
     "name": "moumine9",
     "url": "https://github.com/moumine9"
   },
-  "homepage": "https://github.com/moumine9/claude-acli",
-  "repository": "https://github.com/moumine9/claude-acli",
+  "homepage": "https://github.com/moumine9/acli",
+  "repository": "https://github.com/moumine9/acli",
   "license": "MIT",
   "keywords": ["atlassian", "jira", "acli", "cli", "work-items", "sprints", "claude-code"]
 }
