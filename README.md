@@ -4,7 +4,7 @@ Claude Code skills and a hook for managing Jira from the terminal via the Atlass
 
 ## What's in here
 
-Four skills cover the main Jira workflows: authenticating, searching issues and projects, viewing sprint data, and creating or editing work items. A PostToolUse hook watches for authentication errors and tells Claude to offer a fix. A `settings.local.json` file pre-approves the `acli` commands the skills use so you are not prompted on every run.
+Four skills cover the main Jira workflows: authenticating, searching issues and projects, viewing sprint data, and creating or editing work items. A PostToolUse hook watches for authentication errors and tells Claude to offer a fix. A `settings.local.json` file pre-approves the `acli` commands the skills use so you are not prompted on every run. **90 commands** are documented across `docs/commands.md` and `docs/reference.md`.
 
 ## Requirements
 
