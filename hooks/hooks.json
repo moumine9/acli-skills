@@ -6,6 +6,19 @@
         "hooks": [
           {
             "type": "command",
+            "if": "Bash(acli *)",
+            "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/acli-auth-guard.sh\""
+          }
+        ]
+      }
+    ],
+    "PostToolUseFailure": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "if": "Bash(acli *)",
             "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/acli-auth-guard.sh\""
           }
         ]

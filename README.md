@@ -68,6 +68,11 @@ Run these three commands inside any Claude Code session:
 /reload-plugins
 ```
 
+Choose a scope when prompted:
+- **User** — available in all your projects (recommended)
+- **Project** — installs into `.claude/plugins/` for the whole team
+- **Local** — project-scoped but only for you
+
 Skills are available as:
 
 - `/acli:acli-auth`
@@ -76,6 +81,8 @@ Skills are available as:
 - `/acli:acli-workitem`
 
 The auth guard hook activates automatically after install.
+
+> **Note:** The official Anthropic marketplace includes an `atlassian` plugin that connects via MCP. This plugin is different: it wraps the `acli` CLI using skills, which load progressively and use far less context than MCP tool definitions loaded at session start.
 
 ## Test locally before installing
 
@@ -150,7 +157,9 @@ Skills marked "No" use `disable-model-invocation: true` — Claude will not trig
 
 | Hook | Trigger | What it does |
 |---|---|---|
-| acli-auth-guard.sh | PostToolUse (Bash) | Detects auth errors in `acli` output and injects context prompting Claude to offer re-authentication |
+| acli-auth-guard.sh | PostToolUse + PostToolUseFailure (Bash) | Detects auth errors in `acli` output and injects context prompting Claude to offer re-authentication |
+
+The hook uses an `if: "Bash(acli *)"` condition so it only spawns when an `acli` command is involved, not on every Bash call.
 
 ### Settings
 
