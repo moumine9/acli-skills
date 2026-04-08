@@ -4,13 +4,32 @@ Claude Code skills and hooks for working with Jira via the Atlassian CLI (`acli`
 
 ## What's in here
 
-This repo has Claude Code skills for common Jira tasks (auth, search, sprints, work items), a PostToolUse hook that catches authentication errors and prompts you to re-authenticate, and a settings file with pre-approved acli command permissions.
+This repo has Claude Code skills for common Jira tasks (auth, search, sprints, work items), a PostToolUse hook that catches authentication errors and prompts you to re-authenticate, and a settings file with pre-approved acli command permissions. Install it as a plugin or copy the pieces you need manually.
 
 ## Prerequisites
 
 - [acli](https://developer.atlassian.com/cloud/acli/) (Atlassian CLI) installed
 - [Claude Code](https://docs.anthropic.com/en/docs/claude-code) installed
 - A Jira Cloud account
+
+## Install as a plugin (recommended)
+
+Inside any Claude Code session:
+
+```
+/plugin marketplace add moumine9/claude-acli
+/plugin install claude-acli
+/reload-plugins
+```
+
+Skills are then available as:
+
+- `/claude-acli:acli-auth`
+- `/claude-acli:acli-search`
+- `/claude-acli:acli-sprint`
+- `/claude-acli:acli-workitem`
+
+The auth guard hook activates automatically once the plugin is installed.
 
 ## 1. Install acli
 
@@ -89,12 +108,12 @@ cp .claude/settings.local.json <your-project>/.claude/settings.local.json
 
 ## Skills
 
-| Skill | Trigger | Description |
-|---|---|---|
-| acli-auth | `/acli-auth` | Login, logout, check status, or switch Jira accounts |
-| acli-search | `/acli-search` | Search work items, list projects, find boards via JQL |
-| acli-sprint | `/acli-sprint` | List sprints and work items in a sprint |
-| acli-workitem | `/acli-workitem` | Create, edit, view, transition, assign, or comment on Jira issues |
+| Skill | Plugin trigger | Standalone trigger | Description |
+|---|---|---|---|
+| acli-auth | `/claude-acli:acli-auth` | `/acli-auth` | Login, logout, check status, or switch Jira accounts |
+| acli-search | `/claude-acli:acli-search` | `/acli-search` | Search work items, list projects, find boards via JQL |
+| acli-sprint | `/claude-acli:acli-sprint` | `/acli-sprint` | List sprints and work items in a sprint |
+| acli-workitem | `/claude-acli:acli-workitem` | `/acli-workitem` | Create, edit, view, transition, assign, or comment on Jira issues |
 
 ## Hooks
 
