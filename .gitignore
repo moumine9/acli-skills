@@ -1,0 +1,40 @@
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Secrets and credentials
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+id_rsa*
+id_ed25519*
+id_ecdsa*
+credentials.json
+service-account*.json
+.npmrc
+.netrc
+.htpasswd
+token
+token.txt
+*_token
+*_token.txt
+
+# Claude local overrides (may contain personal tokens or paths)
+.claude/settings.local.json
+
+# acli stores auth tokens in the OS keychain / config dir, not here
+# but guard against accidental drops
+config.yml
+.acli/
