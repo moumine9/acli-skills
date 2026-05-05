@@ -140,6 +140,20 @@ cp .claude/settings.local.json <your-project>/.claude/settings.local.json
 
 ---
 
+## Integrations
+
+### plan-realisation-fe
+
+The `plan-realisation-fe` skill (from `claude-code-setup`) uses `acli:workitem view` to automatically fetch Jira ticket context when generating a plan document. It:
+
+1. Detects the ticket key from the current branch name (e.g. `PV2-12493` in `PV2-12493-fix-something`) or from an explicit argument.
+2. Calls `acli jira workitem view <KEY>` with the fields `key,issuetype,summary,status,assignee,description,acceptance-criteria,labels,priority`.
+3. Uses the ticket description and acceptance criteria to inform the **Problematique** and **Solution** sections of the generated plan.
+
+For this to work, `acli` must be authenticated (`acli jira auth login --web`) and the plugin must be installed in the same Claude Code session.
+
+---
+
 ## Reference docs
 
 - [docs/commands.md](docs/commands.md) — all available commands at a glance
