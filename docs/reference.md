@@ -2,7 +2,9 @@
 
 `acli` is the Atlassian CLI. It covers Jira Cloud, Confluence Cloud, organization admin tasks, and the Rovo Dev AI coding agent.
 
-Top-level commands: `jira`, `confluence`, `admin`, `auth`, `config`, `rovodev`, `feedback`, `completion`
+Top-level commands: `jira`, `confluence`, `admin`, `auth`, `config`, `rovodev`, `guard`, `feedback`, `completion`
+
+`guard` (Atlassian Guard CLI) ships as a separate plugin that isn't installed by default — running `acli guard` errors with `Plugin guard not found` until it's installed, so its subcommands aren't documented here.
 
 ---
 
@@ -79,7 +81,8 @@ Get-Content token.txt | acli jira auth login --site mysite.atlassian.net --email
 | `comment` | Subgroup: create/list/update/delete/visibility |
 | `attachment` | Subgroup: list/delete |
 | `link` | Subgroup: create/delete/list/type |
-| `watcher` | Subgroup: list/remove |
+| `list-watchers` | List watchers of an issue |
+| `watcher` | Subgroup: list (deprecated, use `list-watchers`)/remove |
 
 ### create
 
@@ -302,8 +305,10 @@ All three accept the same selectors:
 
 | Subcommand | Flags |
 |---|---|
-| `list` | `--key string`, `--json` |
+| `list` [DEPRECATED, use `acli jira workitem list-watchers`] | `--key string`, `--json` |
 | `remove` | `--key string`, `--user string` (account ID) |
+
+`acli jira workitem list-watchers` takes the same flags as the deprecated `watcher list` and is now the documented way to list watchers.
 
 ---
 
@@ -376,7 +381,8 @@ All three accept the same selectors:
 | Subcommand | Description |
 |---|---|
 | `create` | Create a scrum or kanban board |
-| `get` | Get board details by ID |
+| `get` [DEPRECATED, use `view`] | Get board details by ID |
+| `view` | View details of a board by ID |
 | `search` | Search boards by name, project, type |
 | `delete` | Delete one or more boards |
 | `list-projects` | List projects associated with a board |
@@ -393,10 +399,19 @@ All three accept the same selectors:
     --json
 ```
 
-### get
+### get (deprecated)
+
+Deprecated since 2026-05-13, removal scheduled for 2026-12-01. Use `view` instead.
 
 ```
     --id string   Board ID
+    --json
+```
+
+### view
+
+```
+    --id string   ID of the board to view  [required]
     --json
 ```
 
@@ -509,14 +524,15 @@ All three accept the same selectors:
 
 ## acli jira field
 
-Manages custom fields. Note: there is no `list` subcommand; use `create`, `update`, `delete`, and `cancel-delete`.
+Manages custom fields. Note: there is no `list` subcommand; use `create`, `update`, `delete`, and `restore`.
 
 | Subcommand | Description |
 |---|---|
 | `create` | Create a custom field |
 | `update` | Update a custom field |
 | `delete` | Move a custom field to trash |
-| `cancel-delete` | Restore a custom field from trash |
+| `restore` | Restore a custom field from trash |
+| `cancel-delete` [DEPRECATED, use `restore`] | Restore a custom field from trash |
 
 ### create
 
@@ -539,7 +555,9 @@ Manages custom fields. Note: there is no `list` subcommand; use `create`, `updat
     --json
 ```
 
-### delete / cancel-delete
+### delete / restore / cancel-delete (deprecated)
+
+`cancel-delete` is deprecated since 2026-05-13, removal scheduled for 2026-12-01. Use `restore` instead.
 
 ```
     --id string   Custom field ID  [required]
@@ -552,12 +570,14 @@ Manages custom fields. Note: there is no `list` subcommand; use `create`, `updat
 | Subcommand | Description |
 |---|---|
 | `list` | List my or favourite filters |
-| `get` | Get a filter by ID |
+| `get` [DEPRECATED, use `view`] | Get a filter by ID |
+| `view` | View a filter by ID |
 | `search` | Search filters by name/owner |
 | `update` | Update filter name, JQL, permissions |
 | `add-favourite` | Mark a filter as favourite |
 | `change-owner` | Reassign filter ownership |
-| `get-columns` | Get configured columns for a filter |
+| `get-columns` [DEPRECATED, use `list-columns`] | Get configured columns for a filter |
+| `list-columns` | List configured columns for a filter |
 | `reset-columns` | Reset columns to default |
 
 ### list
@@ -568,7 +588,9 @@ Manages custom fields. Note: there is no `list` subcommand; use `create`, `updat
     --json
 ```
 
-### get
+### get (deprecated) / view
+
+Deprecated since 2026-05-13, removal scheduled for 2026-12-01. Use `view` instead.
 
 ```
     --id string   Filter ID  [required]
@@ -615,11 +637,13 @@ Manages custom fields. Note: there is no `list` subcommand; use `create`, `updat
     --json
 ```
 
-### get-columns / reset-columns
+### get-columns (deprecated) / list-columns / reset-columns
+
+`get-columns` is deprecated since 2026-05-13, removal scheduled for 2026-12-01. Use `list-columns` instead.
 
 ```
     --key string   Filter ID or key  [required]
-    --json                            (get-columns only)
+    --json                            (get-columns / list-columns only)
 ```
 
 ---
@@ -873,14 +897,58 @@ Interactive mode (no flags) prompts for enable/disable.
 
 ---
 
+## acli feedback
+
+Submit a request or report a problem directly to Atlassian.
+
+```
+acli feedback --summary "I have a problem" --details "..." --email "user@atlassian.com"
+```
+
+| Flag | Description |
+|---|---|
+| `-s, --summary string` | Summary of the feedback |
+| `-d, --details string` | Details of the feedback |
+| `-e, --email string` | Email address to receive the response |
+| `-a, --attachments strings` | Files to attach (repeatable) |
+| `-t, --time string` | Estimated timeframe when the problem occurred, e.g. `1h`, `15m` |
+
+---
+
+## acli completion
+
+Generate a shell autocompletion script.
+
+```
+acli completion bash|fish|powershell|zsh
+```
+
+---
+
 ## acli rovodev (Beta)
 
-Atlassian's AI coding agent. Requires a Rovo Dev scoped API token.
+Atlassian's AI coding agent. `acli rovodev` wraps a separately-downloaded Rovo Dev CLI binary (Python/Typer-based — its own `--help` uses an `[OPTIONS] COMMAND [ARGS]` usage line, not the Go/Cobra style of the rest of `acli`). The binary downloads automatically the first time any `acli rovodev ...` subcommand runs.
 
 Setup:
 1. Create token: https://go.atlassian.com/rovo-dev-api-token
 2. `acli rovodev auth login`
 3. `acli rovodev run`
+
+| Subcommand | Description |
+|---|---|
+| `run` | Run the Rovo Dev TUI application |
+| `auth` | Subgroup: login/logout/status |
+| `oauth` | Manage OAuth authentication credentials |
+| `config` | Open the Rovo Dev configuration file in your editor |
+| `log` | Open the Rovo Dev log file in your editor |
+| `mcp` | Open the Rovo Dev MCP config file in your editor |
+| `serve` | Run Rovo Dev CLI in server mode |
+| `acp` | Run Rovo Dev as an ACP server |
+| `lsp` | Run Rovo Dev CLI as a language server |
+| `legacy` | Run the legacy (non-TUI) Rovo Dev CLI |
+| `doctor` | Run Rovo Dev CLI diagnostics (local checks are read-only; `--twg` adds live TWG probes) |
+
+Only `auth` and `run` are covered by this repo's skills; the rest (`oauth`, `config`, `log`, `mcp`, `serve`, `acp`, `lsp`, `legacy`, `doctor`) are new since this reference was last generated — check `acli rovodev <command> --help` for current flags before relying on them.
 
 ### acli rovodev auth
 
