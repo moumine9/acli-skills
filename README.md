@@ -1,10 +1,10 @@
-# acli
+# acli-skills
 
 Claude Code skills and a hook for managing Jira from the terminal via the Atlassian CLI (`acli`).
 
 ## What's in here
 
-Four skills cover the main Jira workflows: authenticating, searching issues and projects, viewing sprint data, and creating or editing work items. A PostToolUse hook watches for authentication errors and tells Claude to offer a fix. A `settings.local.json` file pre-approves the `acli` commands the skills use so you are not prompted on every run. **90 commands** are documented across `docs/commands.md` and `docs/reference.md`.
+Four skills cover the main Jira workflows: authenticating, searching issues and projects, viewing sprint data, and creating or editing work items. A PostToolUse hook watches for authentication errors and tells Claude to offer a fix. A `settings.local.json` file pre-approves the `acli` commands the skills use so you are not prompted on every run. **106 commands** are documented across `docs/commands.md` and `docs/reference.md`.
 
 ## Requirements
 
@@ -63,8 +63,8 @@ The `acli-auth-guard.sh` hook detects authentication errors in command output an
 Run these three commands inside any Claude Code session:
 
 ```
-/plugin marketplace add moumine9/acli
-/plugin install acli
+/plugin marketplace add moumine9/acli-skills
+/plugin install acli-skills
 /reload-plugins
 ```
 
@@ -75,10 +75,10 @@ Choose a scope when prompted:
 
 Skills are available as:
 
-- `/acli:auth`
-- `/acli:search`
-- `/acli:sprint`
-- `/acli:workitem`
+- `/acli-skills:auth`
+- `/acli-skills:search`
+- `/acli-skills:sprint`
+- `/acli-skills:workitem`
 
 The auth guard hook activates automatically after install.
 
@@ -144,7 +144,7 @@ cp .claude/settings.local.json <your-project>/.claude/settings.local.json
 
 ### plan-realisation-fe
 
-The `plan-realisation-fe` skill (from `claude-code-setup`) uses `acli:workitem view` to automatically fetch Jira ticket context when generating a plan document. It:
+The `plan-realisation-fe` skill (from `claude-code-setup`) uses `acli-skills:workitem view` to automatically fetch Jira ticket context when generating a plan document. It:
 
 1. Detects the ticket key from the current branch name (e.g. `PV2-12493` in `PV2-12493-fix-something`) or from an explicit argument.
 2. Calls `acli jira workitem view <KEY>` with the fields `key,issuetype,summary,status,assignee,description,acceptance-criteria,labels,priority`.
@@ -163,10 +163,10 @@ For this to work, `acli` must be authenticated (`acli jira auth login --web`) an
 
 | Skill | Plugin trigger | Standalone trigger | Description | Auto-invoked |
 |---|---|---|---|---|
-| auth | `/acli:auth` | `/auth` | Login, logout, check status, or switch Jira and Confluence accounts | No |
-| search | `/acli:search` | `/search` | Search work items by JQL, list projects, boards, filters, and dashboards | Yes |
-| sprint | `/acli:sprint` | `/sprint` | List, create, and update sprints; show work items in a sprint | Yes |
-| workitem | `/acli:workitem` | `/workitem` | Create, view, edit, transition, assign, comment, link, or clone issues | No |
+| auth | `/acli-skills:auth` | `/auth` | Login, logout, check status, or switch Jira and Confluence accounts | No |
+| search | `/acli-skills:search` | `/search` | Search work items by JQL, list projects, boards, filters, and dashboards | Yes |
+| sprint | `/acli-skills:sprint` | `/sprint` | List, create, and update sprints; show work items in a sprint | Yes |
+| workitem | `/acli-skills:workitem` | `/workitem` | Create, view, edit, transition, assign, comment, link, or clone issues | No |
 
 Skills marked "No" use `disable-model-invocation: true` — Claude will not trigger them automatically. `acli-search` and `acli-sprint` are read-only and safe to auto-invoke.
 

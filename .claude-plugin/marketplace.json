@@ -1,0 +1,22 @@
+{
+  "name": "acli-skills",
+  "description": "Claude Code skills and hooks for working with Jira via the Atlassian CLI (acli)",
+  "owner": {
+    "name": "moumine9",
+    "url": "https://github.com/moumine9"
+  },
+  "plugins": [
+    {
+      "name": "acli-skills",
+      "description": "Claude Code skills and hooks for Jira — manage work items, sprints, and search via the Atlassian CLI (acli) without leaving your terminal",
+      "author": {
+        "name": "moumine9",
+        "url": "https://github.com/moumine9"
+      },
+      "category": "productivity",
+      "source": "./",
+      "homepage": "https://github.com/moumine9/acli-skills",
+      "keywords": ["atlassian", "jira", "acli", "cli", "work-items", "sprints", "claude-code"]
+    }
+  ]
+}
