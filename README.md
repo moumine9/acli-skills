@@ -4,7 +4,7 @@ Claude Code skills and a hook for managing Jira from the terminal via the Atlass
 
 ## What's in here
 
-Four skills cover the main Jira workflows: authenticating, searching issues and projects, viewing sprint data, and creating or editing work items. A PostToolUse hook watches for authentication errors and tells Claude to offer a fix. A `settings.local.json` file pre-approves the `acli` commands the skills use so you are not prompted on every run. **106 commands** are documented across `docs/commands.md` and `docs/reference.md`.
+Five skills cover the main Jira workflows — authenticating, searching issues and projects, viewing sprint data, creating or editing work items — plus converting Markdown to Atlassian Document Format (ADF) for publishing to Jira or Confluence. A PostToolUse hook watches for authentication errors and tells Claude to offer a fix. A `settings.local.json` file pre-approves the `acli` commands the skills use so you are not prompted on every run. **106 commands** are documented across `docs/commands.md` and `docs/reference.md`.
 
 ## Requirements
 
@@ -79,6 +79,7 @@ Skills are available as:
 - `/acli-skills:search`
 - `/acli-skills:sprint`
 - `/acli-skills:workitem`
+- `/acli-skills:atlassian-document-format`
 
 The auth guard hook activates automatically after install.
 
@@ -103,9 +104,10 @@ cp -r skills/auth ~/.claude/skills/
 cp -r skills/search ~/.claude/skills/
 cp -r skills/sprint ~/.claude/skills/
 cp -r skills/workitem ~/.claude/skills/
+cp -r skills/atlassian-document-format ~/.claude/skills/
 ```
 
-Skills are then available as `/auth`, `/search`, `/sprint`, and `/workitem`.
+Skills are then available as `/auth`, `/search`, `/sprint`, `/workitem`, and `/atlassian-document-format`.
 
 ### Auth guard hook
 
@@ -158,6 +160,7 @@ For this to work, `acli` must be authenticated (`acli jira auth login --web`) an
 
 - [docs/commands.md](docs/commands.md) — all available commands at a glance
 - [docs/reference.md](docs/reference.md) — full reference with flags and examples
+- [CHANGELOG.md](CHANGELOG.md) — plugin version history
 
 ### Skills
 
@@ -167,8 +170,9 @@ For this to work, `acli` must be authenticated (`acli jira auth login --web`) an
 | search | `/acli-skills:search` | `/search` | Search work items by JQL, list projects, boards, filters, and dashboards | Yes |
 | sprint | `/acli-skills:sprint` | `/sprint` | List, create, and update sprints; show work items in a sprint | Yes |
 | workitem | `/acli-skills:workitem` | `/workitem` | Create, view, edit, transition, assign, comment, link, or clone issues | No |
+| atlassian-document-format | `/acli-skills:atlassian-document-format` | `/atlassian-document-format` | Convert Markdown into Atlassian Document Format (ADF) JSON for Jira/Confluence | Yes |
 
-Skills marked "No" use `disable-model-invocation: true` — Claude will not trigger them automatically. `acli-search` and `acli-sprint` are read-only and safe to auto-invoke.
+Skills marked "No" use `disable-model-invocation: true` — Claude will not trigger them automatically. `acli-search`, `acli-sprint`, and `atlassian-document-format` are safe to auto-invoke (read-only or pure conversion, no destructive `acli` calls).
 
 ### Hooks
 
