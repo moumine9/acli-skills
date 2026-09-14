@@ -160,6 +160,7 @@ For this to work, `acli` must be authenticated (`acli jira auth login --web`) an
 
 - [docs/commands.md](docs/commands.md) — all available commands at a glance
 - [docs/reference.md](docs/reference.md) — full reference with flags and examples
+- [docs/acli-help.txt](docs/acli-help.txt) — raw `acli --help` tree (baseline for spotting CLI changes; regenerate with `scripts/dump-help.sh`)
 - [CHANGELOG.md](CHANGELOG.md) — plugin version history
 
 ### Skills

@@ -1,0 +1,2472 @@
+# acli version 1.3.36-stable
+
+===== acli 
+Work seamlessly with Atlassian from the command line.
+
+Usage:
+  acli [command]
+
+Available Commands
+  admin       Admin commands.
+  auth        Authenticate to multiple Atlassian accounts with OAuth.
+  confluence  Confluence Cloud commands.
+  guard       Atlassian Guard CLI.
+  jira        Jira Cloud commands.
+  rovodev     Atlassian’s AI coding agent: Rovo Dev (Beta).
+
+Additional Commands:
+  completion  Generate the autocompletion script for the specified shell
+  config      Commands for changing configuration settings.
+  feedback    Submit a request or report a problem.
+  help        Help about any command
+
+Flags:
+  -h, --help      Show help for command
+  -v, --version   version for acli
+
+Use "acli [command] --help" for more information about a command.
+
+===== acli admin
+Admin commands.
+
+Usage:
+  acli admin [command]
+
+Available Commands:
+  auth        Authenticate to use Atlassian CLI for organization admin tasks.
+  user        Manage a user within your Atlassian organization.
+
+Flags:
+  -h, --help   Show help for command
+
+Use "acli admin [command] --help" for more information about a command.
+
+===== acli admin auth
+Authenticate to use Atlassian CLI for organization admin tasks.
+
+Usage:
+  acli admin auth [command]
+
+Available Commands:
+  login       Authenticate for the organization admin-specific tasks.
+  logout      Remove authentication and log out of organization admin account.
+  status      Show status for organization admin account.
+  switch      Switch between Atlassian organization admin accounts.
+
+Flags:
+  -h, --help   Show help for command
+
+Use "acli admin auth [command] --help" for more information about a command.
+
+===== acli admin auth login
+Authenticate for the organization admin-specific tasks.
+
+Usage:
+  acli admin auth login [flags]
+
+Examples:
+# Authenticate using API key
+$ acli admin auth login --email admin@atlassian.com --token < token.txt
+OR
+$ echo <token> | acli admin auth login --email admin@atlassian.com --token
+
+Flags:
+  -e, --email string   Admin email is required for authentication
+  -h, --help           Show help for command
+      --token          Read API key from standard input (create one at: https://admin.atlassian.com -> settings -> API Keys)
+
+===== acli admin auth logout
+Remove authentication and log out of organization admin account.
+
+Usage:
+  acli admin auth logout [flags]
+
+Examples:
+$ acli admin auth logout
+
+Flags:
+  -h, --help   Show help for command
+
+===== acli admin auth status
+Show status for organization admin account.
+
+Usage:
+  acli admin auth status [flags]
+
+Examples:
+$ acli admin auth status
+
+Flags:
+  -h, --help   Show help for command
+
+===== acli admin auth switch
+Switch between Atlassian organization admin accounts.
+
+Usage:
+  acli admin auth switch [flags]
+
+Examples:
+$ acli admin auth switch --org myorgname
+
+Flags:
+  -h, --help         Show help for command
+  -o, --org string   Org of the admin account from which to switch
+
+===== acli admin user
+Manage a user within your Atlassian organization.
+
+Usage:
+  acli admin user [command]
+
+Available Commands:
+  activate      Activate a user.
+  cancel-delete Cancel deletion of a managed account
+  deactivate    Deactivate a user.
+  delete        Delete a managed account.
+
+Flags:
+  -h, --help   Show help for command
+
+Use "acli admin user [command] --help" for more information about a command.
+
+===== acli admin user activate
+Activate a user.
+
+Usage:
+  acli admin user activate [flags]
+
+Examples:
+# Activate a user with email or account ID
+$ acli user activate --email john@example.com,anna@example.com
+$ acli user activate --id abcd,123
+$ acli user activate --from-file listofmails.txt
+
+
+Flags:
+  -e, --email string       List of emails to activate users
+  -f, --from-file string   Read the list of emails or account IDs from the file
+  -h, --help               Show help for command
+      --id string          List of Atlassian account IDs to activate
+      --ignore-errors      Ignore the errors and continue with the next user
+      --json               Generate a JSON output
+
+===== acli admin user cancel-delete
+Cancel deletion of a managed account from Atlassian Administration.
+
+Usage:
+  acli admin user cancel-delete [flags]
+
+Examples:
+# Cancel deletion of a managed account from Atlassian Administration
+$ acli admin user cancel-delete --email abc@atlassian.com
+$ acli admin user cancel-delete --id 721217379117310973
+$ acli admin user cancel-delete --from-file listofmails.txt
+
+Flags:
+      --email string       List of emails to cancel deletion of managed accounts
+      --from-file string   Read the list of emails or account IDs from the file
+  -h, --help               Show help for command
+      --id string          List of Atlassian account IDs for which deletion to be cancelled
+      --ignore-errors      Ignore the errors and continue
+      --json               Generate a JSON output
+
+===== acli admin user deactivate
+Deactivate a user.
+
+Usage:
+  acli admin user deactivate [flags]
+
+Examples:
+# Deactivate a user with email or account ID
+$ acli user deactivate --email john@example.com,anna@example.com
+$ acli user deactivate --id abcd123
+$ acli user deactivate --from-file listofmails.txt
+
+
+Flags:
+  -e, --email string       List of emails to deactivate users
+  -f, --from-file string   Read the list of emails or account IDs from the file
+  -h, --help               Show help for command
+      --id string          List of Atlassian account IDs to deactivate
+      --ignore-errors      Ignore the errors and continue with the next user
+      --json               Generate a JSON output
+
+===== acli admin user delete
+Delete a managed account from Atlassian Administration.
+
+Usage:
+  acli admin user delete [flags]
+
+Examples:
+# Delete a managed account from Atlassian
+$ acli admin user delete --email abc@atlassian.com
+$ acli admin user delete --id 721217379117310973
+$ acli admin user delete --from-file listofmails.txt
+
+Flags:
+      --email string       List of emails to be deleted
+      --from-file string   Read list of emails or account IDs from the file
+  -h, --help               Show help for command
+      --id string          List of Atlassian account IDs to be deleted
+      --ignore-errors      Ignore the errors and continue
+      --json               Generate a JSON output
+
+===== acli auth
+Authenticate to multiple Atlassian accounts with OAuth.
+
+Usage:
+  acli auth [command]
+
+Available Commands:
+  login       Authenticate to Jira and Confluence sites with OAuth.
+  logout      Logout globally from all active OAuth accounts.
+  status      Show OAuth status.
+  switch      Switch between OAuth accounts for Jira and Confluence.
+
+Flags:
+  -h, --help   Show help for command
+
+Use "acli auth [command] --help" for more information about a command.
+
+===== acli auth login
+Authenticate to Jira and Confluence sites with OAuth.
+
+Usage:
+  acli auth login [flags]
+
+Flags:
+  -h, --help   Show help for command
+
+===== acli auth logout
+Logout globally from all active OAuth accounts.
+
+Usage:
+  acli auth logout [flags]
+
+Examples:
+$ acli auth logout
+
+Flags:
+  -h, --help   Show help for command
+
+===== acli auth status
+Show OAuth status.
+
+Usage:
+  acli auth status [flags]
+
+Examples:
+$ acli auth status
+
+Flags:
+  -h, --help   Show help for command
+
+===== acli auth switch
+Switch between OAuth accounts for Jira and Confluence.
+
+Usage:
+  acli auth switch [flags]
+
+Examples:
+# Interactive mode
+$ acli auth switch
+
+# Switch to a specific site
+$ acli auth switch --site mysite.atlassian.net
+
+# Switch to a specific email
+$ acli auth switch --email user@atlassian.com
+
+# Switch to a specific site and email
+$ acli auth switch --site mysite.atlassian.net --email user@atlassian.com
+
+
+Flags:
+  -e, --email string   Atlassian account email
+  -h, --help           Show help for command
+  -s, --site string    Atlassian account site
+
+===== acli confluence
+Confluence Cloud commands.
+
+Usage:
+  acli confluence [command]
+
+Available Commands:
+  auth        Authenticate to use Confluence with OAuth or API token.
+  blog        Confluence blog commands.
+  page        Confluence page commands.
+  space       Confluence space commands.
+
+Flags:
+  -h, --help   Show help for command
+
+Use "acli confluence [command] --help" for more information about a command.
+
+===== acli confluence auth
+Authenticate to use Confluence with OAuth or API token.
+
+Usage:
+  acli confluence auth [command]
+
+Available Commands:
+  login       Authenticate to Confluence with OAuth or API token.
+  logout      Logout from current Confluence account.
+  status      Show Confluence account status.
+  switch      Switch between Confluence accounts.
+
+Flags:
+  -h, --help   Show help for command
+
+Use "acli confluence auth [command] --help" for more information about a command.
+
+===== acli confluence auth login
+Authenticate to Confluence with OAuth or API token.
+
+Usage:
+  acli confluence auth login [flags]
+
+Examples:
+# Authenticate using web browser (OAuth)
+$ acli confluence auth login --web
+
+# Authenticate with your email, site name and API token without scopes
+$ acli confluence auth login --site "mysite.atlassian.net" --email "user@atlassian.com" --token < token.txt
+OR
+$ echo <token> | acli confluence auth login --site "mysite.atlassian.net" --email "user@atlassian.com" --token
+	
+# Authenticate with your email, site name and API token without scopes on Windows
+$ Get-Content token.txt | .\acli.exe confluence auth login --site "mysite.atlassian.net" --email "user@atlassian.com" --token
+
+Flags:
+  -e, --email string   User email is required for authentication
+  -h, --help           Show help for command
+  -s, --site string    Site of the Atlassian instance is required for authentication
+      --token          Read token from standard input
+  -w, --web            Authenticate using web browser
+
+===== acli confluence auth logout
+Logout from current Confluence account.
+
+Usage:
+  acli confluence auth logout [flags]
+
+Examples:
+$ acli confluence auth logout
+
+Flags:
+  -h, --help   Show help for command
+
+===== acli confluence auth status
+Show Confluence account status.
+
+Usage:
+  acli confluence auth status [flags]
+
+Examples:
+$ acli confluence auth status
+
+Flags:
+  -h, --help   Show help for command
+
+===== acli confluence auth switch
+Switch between Confluence accounts.
+
+Usage:
+  acli confluence auth switch [flags]
+
+Examples:
+# Interactive mode
+$ acli confluence auth switch
+
+# Switch to a specific site
+$ acli confluence auth switch --site mysite.atlassian.net
+
+# Switch to a specific email
+$ acli confluence auth switch --email user@atlassian.com
+
+# Switch to a specific site and email
+$ acli confluence auth switch --site mysite.atlassian.net --email user@atlassian.com
+
+
+Flags:
+  -e, --email string   Atlassian account email
+  -h, --help           Show help for command
+  -s, --site string    Atlassian account site
+
+===== acli confluence blog
+Confluence blog commands.
+
+Usage:
+  acli confluence blog [command]
+
+Available Commands:
+  create      Create a new Confluence blog post in the specified space.
+  list        List Confluence blog posts.
+  view        View details of a Confluence blog post.
+
+Flags:
+  -h, --help   Show help for command
+
+Use "acli confluence blog [command] --help" for more information about a command.
+
+===== acli confluence blog create
+Create a new Confluence blog post in the specified space.
+
+Usage:
+  acli confluence blog create [flags]
+
+Examples:
+# Create a published blog post in a space
+$ acli confluence blog create --space-id 12345 --title "Release Notes" --body "<p>Content here</p>"
+
+# Create a draft blog post
+$ acli confluence blog create --space-id 12345 --title "Work in progress" --status draft --body "<p>Draft content</p>"
+
+# Create a private published blog post
+$ acli confluence blog create --space-id 12345 --title "Private announcement" --private --body "<p>Private content</p>"
+
+# Create a blog post with custom creation timestamp
+$ acli confluence blog create --space-id 12345 --title "Backdated blog" --created-at "2026-01-16T10:20:30.000Z" --body "<p>Content</p>" --json
+
+# Create a blog post from a file
+$ acli confluence blog create --space-id 12345 --title "From file" --from-file ./blog_content.html
+
+# Create a blog post from JSON
+$ acli confluence blog create --from-json ./blog_payload.json
+
+# Generate example JSON structure
+$ acli confluence blog create --generate-json
+
+
+Flags:
+      --body string         Blog post content in Confluence storage format (XHTML)
+      --created-at string   ISO 8601 timestamp for when the blog post is created (optional)
+      --from-file string    Read blog post content from a file (plain text or HTML)
+      --from-json string    Read blog post payload from a JSON file
+      --generate-json       Generate example JSON structure for use with --from-json
+  -h, --help                Show help for command
+  -j, --json                Output result in JSON format
+      --private             Create the blog post as private
+      --space-id string     ID of the space where the blog post will be created
+      --status string       Status of the blog post (current for published or draft) (default "current")
+      --title string        Title of the blog post
+
+===== acli confluence blog list
+List Confluence blog posts.
+
+Usage:
+  acli confluence blog list [flags]
+
+Examples:
+# Get latest blog posts from a space with default limit
+$ acli confluence blog list --space-id 12345
+
+# Get a specific blog post by ID
+$ acli confluence blog list --id 98765 -j
+
+# Get current (published) blog posts from multiple spaces
+$ acli confluence blog list --space-id 12345,67890 --status current,deleted --limit 25
+
+# Get blog posts matching a title filter
+$ acli confluence blog list --space-id 12345 --title "Release Notes"
+
+# Get blog posts with body in storage format
+$ acli confluence blog list --space-id 12345 --body-format storage -l 10
+
+# Paginate using cursor from a previous response
+$ acli confluence blog list --cursor "<cursor-from-previous-call>" --limit 25 -j
+
+
+Flags:
+      --body-format string   Body representation of the blog post content to return (e.g. storage, atlas_doc_format)
+      --csv                  Output in CSV format
+      --cursor string        Pagination cursor token used to retrieve the next page of results
+  -h, --help                 Show help for command
+      --id string            Comma-separated list of blog post IDs to filter by
+  -j, --json                 Output in JSON format
+  -l, --limit int            Maximum number of blog posts to return in a single page of results (default 25)
+      --sort string          Sort order for returned blog posts
+      --space-id string      Filter blog posts by space ID(s). Accepts comma-separated list of space IDs
+      --status string        Filter blog posts by status. Accepts comma-separated list of statuses (e.g. current, deleted, trashed)
+      --title string         Filter blog posts by title
+
+===== acli confluence blog view
+View details of a Confluence blog post.
+
+Usage:
+  acli confluence blog view [flags]
+
+Examples:
+# View a blog post by ID
+$ acli confluence blog view --id 98765
+
+# View a blog post with body in storage format
+$ acli confluence blog view --id 98765 --body-format storage
+
+# View a blog post with body in atlas document format
+$ acli confluence blog view --id 98765 --body-format atlas_doc_format
+
+# View a specific version of a blog post
+$ acli confluence blog view --id 98765 --version 2
+
+# View a draft version of a blog post
+$ acli confluence blog view --id 98765 --draft
+
+# View a blog post with labels and properties included
+$ acli confluence blog view --id 98765 --include labels,properties
+
+# View a blog post in JSON format
+$ acli confluence blog view --id 98765 --json
+
+
+Flags:
+      --body-format string   The body format to return (default "view")
+      --draft                Retrieve the draft version of this blog post
+  -h, --help                 Show help for command
+      --id string            The unique identifier of the blog post to view
+      --include string       Comma-separated values. Possible values are labels, properties, operations, likes, versions, version, favorited, webresources, collaborators, and all to include all of the above
+  -j, --json                 Output in JSON format
+      --status string        Filter the blog post being retrieved by its status. Valid values are current, trashed, deleted, historical, draft (default "current")
+      --version int          Allows you to retrieve a previously published version. Specify the previous version's number to retrieve its details
+
+===== acli confluence page
+Confluence page commands.
+
+Usage:
+  acli confluence page [command]
+
+Available Commands:
+  view        View details of a Confluence page.
+
+Flags:
+  -h, --help   Show help for command
+
+Use "acli confluence page [command] --help" for more information about a command.
+
+===== acli confluence page view
+View details of a Confluence page.
+
+Usage:
+  acli confluence page view [flags]
+
+Examples:
+# View a page by ID
+$ acli confluence page view --id 123456789
+
+# View a page in JSON format
+$ acli confluence page view --id 123456789 --json
+
+# View a page requesting a specific body representation
+$ acli confluence page view --id 123456789 --body-format storage
+
+
+Flags:
+      --body-format string                         Body representation to request (e.g. storage, atlas_doc_format, view)
+      --get-draft                                  When true, allows returning the draft version (if accessible)
+  -h, --help                                       Show help for command
+      --id string                                  Page ID for the page to be displayed
+      --include-collaborators                      Include collaborators info
+      --include-direct-children                    Include direct child pages
+      --include-favorited-by-current-user-status   Include whether the page is favorited by the current user
+      --include-labels                             Include page labels
+      --include-likes                              Include likes / reactions info
+      --include-operations                         Include allowed operations on the page
+      --include-properties                         Include page content properties
+      --include-version                            Include the detailed version object
+      --include-versions                           Include versions list/summary
+      --include-webresources                       Include required webresources metadata
+      --json                                       Output in JSON format
+      --status string                              Filter by page status (comma-separated list: current,draft,archived)
+      --version int                                Specific version number of the page to retrieve
+
+===== acli confluence space
+Confluence space commands.
+
+Usage:
+  acli confluence space [command]
+
+Available Commands:
+  archive     Archive a Confluence space by key.
+  create      Create a Confluence space.
+  list        List Confluence spaces.
+  restore     Restore a Confluence space from the trash or archive by key.
+  update      Update details of a Confluence space, such as name, description, status, or settings by key.
+  view        View details of a Confluence space.
+
+Flags:
+  -h, --help   Show help for command
+
+Use "acli confluence space [command] --help" for more information about a command.
+
+===== acli confluence space archive
+Archive a Confluence space by key.
+
+Usage:
+  acli confluence space archive [flags]
+
+Examples:
+# Archive a space by key
+$ acli confluence space archive --key SPACEKEY
+
+
+Flags:
+  -h, --help         Show help for command
+      --json         Output in JSON format
+      --key string   Space key for the space to be archived
+
+===== acli confluence space create
+Create a Confluence space.
+
+Usage:
+  acli confluence space create [flags]
+
+Examples:
+# Create space with key and name
+$ acli confluence space create --key SPACEKEY --name "Space Name"
+
+# Create space with key, name and description
+$ acli confluence space create --key SPACEKEY --name "Space Name" --description "Space description"
+
+
+Flags:
+      --alias string          Identifier for the space in confluence page URLs
+      --description string    The description of the new space
+  -h, --help                  Show help for command
+      --json                  Output in JSON format
+      --key string            The key for the new space
+      --name string           The name of the space to be created
+      --private               Whether to create the space as private
+      --template-key string   The key of the template to use
+
+===== acli confluence space list
+List Confluence spaces.
+
+Usage:
+  acli confluence space list [flags]
+
+Examples:
+# List all accessible spaces
+$ acli confluence space list
+
+# List only personal spaces
+$ acli confluence space list --type personal
+
+# List spaces with expanded information
+$ acli confluence space list --expand description,homepage
+
+# List spaces in JSON format
+$ acli confluence space list --json
+
+
+Flags:
+      --expand string   Comma-separated list of properties to expand (description, homepage, permissions)
+  -h, --help            Show help for command
+      --json            Output in JSON format
+      --keys string     Comma-separated list of space keys to filter by
+  -l, --limit int       Maximum number of spaces to return (default 50)
+      --status string   Filter spaces by status (current, archived) (default "current")
+      --type string     Filter spaces by type (global, personal)
+
+===== acli confluence space restore
+Restore a Confluence space from the trash or archive by key.
+
+Usage:
+  acli confluence space restore [flags]
+
+Examples:
+# Restore a space by key
+$ acli confluence space restore --key SPACEKEY
+
+
+Flags:
+  -h, --help         Show help for command
+      --json         Output in JSON format
+      --key string   Space key for the space to be restored
+
+===== acli confluence space update
+Update details of a Confluence space, such as name, description, status, or settings by key.
+
+Usage:
+  acli confluence space update [flags]
+
+Examples:
+# Update the name of a space
+$ acli confluence space update --key SPACEKEY --name "New Team Space Name"
+
+# Update the description of a space
+$ acli confluence space update --key SPACEKEY --description "Updated description"
+
+
+Flags:
+      --description string   New description for the space
+  -h, --help                 Show help for command
+      --json                 Output in JSON format
+      --key string           Space key for the space to be updated
+      --name string          New name for the space
+      --status string        Update the status
+      --type string          New type for the space
+
+===== acli confluence space view
+View details of a Confluence space.
+
+Usage:
+  acli confluence space view [flags]
+
+Examples:
+# View a space by ID
+$ acli confluence space view --id 123456
+
+# View a space with icon and labels
+$ acli confluence space view --id 123456 --icon --labels
+
+# View a space with all additional details
+$ acli confluence space view --id 123456 --include-all
+
+# View a space in JSON format
+$ acli confluence space view --id 123456 --json
+
+
+Flags:
+      --desc-format string   The content format type to be returned in the description field (plain, view)
+  -h, --help                 Show help for command
+      --icon                 Include the icon for the space
+      --id string            Space ID for the space to be displayed
+      --include-all          Include all additional details (icon, labels, role-assignments, permissions, operations, properties)
+      --json                 Output in JSON format
+      --labels               Include labels associated with this space
+      --operations           Include operations associated with this space
+      --permissions          Include space permissions associated with this space
+      --properties           Include space properties associated with this space
+      --role-assignments     Include role assignments associated with this space (EAP sites only)
+
+===== acli jira
+Jira Cloud commands.
+
+Usage:
+  acli jira [command]
+
+Available Commands:
+  auth        Authenticate to use Jira with OAuth or API token.
+  board       Jira board commands.
+  dashboard   Jira dashboard commands.
+  field       Jira field commands.
+  filter      Jira filter commands.
+  project     Jira project commands.
+  sprint      Jira sprint commands.
+  workitem    Jira work item commands.
+
+Flags:
+  -h, --help   Show help for command
+
+Use "acli jira [command] --help" for more information about a command.
+
+===== acli jira auth
+Authenticate to use Jira with OAuth or API token.
+
+Usage:
+  acli jira auth [command]
+
+Available Commands:
+  login       Authenticate to Jira with OAuth or API token.
+  logout      Logout from current Jira account.
+  status      Show Jira account status.
+  switch      Switch between Jira accounts.
+
+Flags:
+  -h, --help   Show help for command
+
+Use "acli jira auth [command] --help" for more information about a command.
+
+===== acli jira auth login
+Authenticate to Jira with OAuth or API token.
+
+Usage:
+  acli jira auth login [flags]
+
+Examples:
+# Authenticate using web browser (OAuth)
+$ acli jira auth login --web
+
+# Authenticate with your email, site name and API token without scopes
+$ acli jira auth login --site "mysite.atlassian.net" --email "user@atlassian.com" --token < token.txt
+OR
+$ echo <token> | acli jira auth login --site "mysite.atlassian.net" --email "user@atlassian.com" --token
+	
+# Authenticate with your email, site name and API token without scopes on Windows
+$ Get-Content token.txt | .\acli.exe jira auth login --site "mysite.atlassian.net" --email "user@atlassian.com" --token
+
+Flags:
+  -e, --email string   User email is required for authentication
+  -h, --help           Show help for command
+  -s, --site string    Site of the Atlassian instance is required for authentication
+      --token          Read token from standard input
+  -w, --web            Authenticate using web browser
+
+===== acli jira auth logout
+Logout from current Jira account.
+
+Usage:
+  acli jira auth logout [flags]
+
+Examples:
+$ acli jira auth logout
+
+Flags:
+  -h, --help   Show help for command
+
+===== acli jira auth status
+Show Jira account status.
+
+Usage:
+  acli jira auth status [flags]
+
+Examples:
+$ acli jira auth status
+
+Flags:
+  -h, --help   Show help for command
+
+===== acli jira auth switch
+Switch between Jira accounts.
+
+Usage:
+  acli jira auth switch [flags]
+
+Examples:
+# Interactive mode
+$ acli jira auth switch
+
+# Switch to a specific site
+$ acli jira auth switch --site mysite.atlassian.net
+
+# Switch to a specific email
+$ acli jira auth switch --email user@atlassian.com
+
+# Switch to a specific site and email
+$ acli jira auth switch --site mysite.atlassian.net --email user@atlassian.com
+
+
+Flags:
+  -e, --email string   Atlassian account email
+  -h, --help           Show help for command
+  -s, --site string    Atlassian account site
+
+===== acli jira board
+Jira board commands.
+
+Usage:
+  acli jira board [command]
+
+Available Commands:
+  create        Create a new Jira board.
+  delete        Deletes one or more Jira boards.
+  get           [DEPRECATED] Jira get board details.
+  list-projects List projects associated with a board.
+  list-sprints  Get all sprints
+  search        Search through all the boards
+  view          View details of a Jira board.
+
+Flags:
+  -h, --help   Show help for command
+
+Use "acli jira board [command] --help" for more information about a command.
+
+===== acli jira board create
+Create a new Jira board.
+
+Usage:
+  acli jira board create [flags]
+
+Examples:
+# Create a scrum board for a project
+$ acli jira board create --name "My Scrum Board" --type "scrum" --filter-id 10040 --location-type "project" --project "TEST"
+
+# Create a kanban board for a project
+$ acli jira board create --name "My Kanban Board" --type "kanban" --filter-id 10040 --location-type "project" --project "PROJ"
+
+# Create a user board
+$ acli jira board create --name "My Personal Board" --type "scrum" --filter-id 10040 --location-type "user"
+
+
+Flags:
+      --filter-id int          ID of a filter that the user has permissions to view
+  -h, --help                   Show help for command
+      --json                   Output in JSON format
+      --location-type string   The container type for the board. Valid values: project, user.
+                               
+      --name string            Name of the board (must be less than 255 characters)
+      --project string         Required if location-type is 'project'. The project key or ID
+      --type string            Type of board to create. Valid values: scrum, kanban.
+
+===== acli jira board delete
+Deletes one or more Jira boards.
+
+Usage:
+  acli jira board delete [flags]
+
+Examples:
+# Delete a single board by ID
+acli jira board delete --id 123
+
+# Delete multiple boards by ID
+acli jira board delete --id 123,456,789
+
+# Delete without confirmation prompt
+acli jira board delete --id 123 --yes
+
+
+Flags:
+  -h, --help        Show help for command
+      --id string   Comma-separated list of board IDs to delete (required)
+      --yes         Automatically answer "yes" to all confirmation prompts
+
+===== acli jira board get
+DEPRECATED: this command is deprecated and will be removed in a future release. It will be removed on 2026-12-01. Deprecated since 2026-05-13.
+Use 'acli jira board view' instead.
+
+Usage:
+  acli jira board get [flags]
+
+Examples:
+# Get board details
+$ acli jira board get --id 123
+
+
+Flags:
+  -h, --help        Show help for command
+      --id string   Board ID to get details for
+      --json        Output in JSON format
+
+===== acli jira board list-projects
+List projects associated with a board.
+
+Usage:
+  acli jira board list-projects [flags]
+
+Examples:
+# List all projects associated with board 123
+$ acli jira board list-projects --id 123
+
+# List projects for board 123, output as JSON
+$ acli jira board list-projects --id 123 --json
+
+# List projects for board 123, with a maximum of 10 results per page
+$ acli jira board list-projects --id 123 --limit 10
+
+# List all projects for board 123, paginating through all results and exporting as CSV
+$ acli jira board list-projects --id 123 --paginate --csv
+
+
+Flags:
+      --csv         Output in CSV format
+  -h, --help        Show help for command
+      --id string   The ID of the board that contains the requested projects.
+      --json        Output in JSON format
+      --limit int   Limit the number of projects, if the limit is > than the page size apply pagination. (default 50)
+      --paginate    Loads all projects and output as they become available.
+
+===== acli jira board list-sprints
+Get all sprints
+
+Usage:
+  acli jira board list-sprints [flags]
+
+Examples:
+# Get all sprints
+$ acli jira board list-sprints --id 123
+
+# Get all sprints with state filters
+$ acli jira board list-sprints --id 123 --state active,closed
+
+# Get all sprints and output in JSON format
+$ acli jira board list-sprints --id 123 --json
+
+# Get all sprints and output in CSV format
+$ acli jira board list-sprints --id 123 --csv
+
+
+Flags:
+      --csv            Output in CSV format
+  -h, --help           Show help for command
+      --id string      The ID of the board that contains the requested sprints.
+      --json           Output in JSON format
+      --limit int      Limit the number of sprints, if the limit is > than the page size apply pagination. (default 50)
+      --paginate       Loads all sprints and output as they become available.
+      --state string   Filters results to sprints in specified states. Valid values: future, active, closed. You can define multiple states separated by commas, e.g. active,closed
+
+===== acli jira board search
+Search through all the boards
+
+Usage:
+  acli jira board search [flags]
+
+Flags:
+      --csv               Output in CSV format
+      --filter string     Filter ID. Filters results to boards that are relevant to a filter. Not supported for next-gen boards.
+                          
+  -h, --help              Show help for command
+      --json              Output in JSON format
+      --limit int         Limit the number of boards, if the limit is > than the page size apply pagination. (default 50)
+      --name string       Filters results to boards that match or partially match the specified name.
+                          
+      --order-by string   Ordering of the results by a given field. If not provided, values will not be sorted. Valid values: name, -name, +name
+                          
+      --paginate          Loads all boards and output as they become available.
+      --private           Boolean. Appends private boards to the end of the list. The name and type fields are excluded for security reasons. Default is false.
+                          
+      --project string    Project key. Filters results to boards that are relevant to a project. Relevance means that the jql filter defined in the board contains a reference to a project.
+                          
+      --type string       Filters results to boards of the specified types. Valid values: scrum, kanban, simple.
+
+===== acli jira board view
+View details of a Jira board.
+
+Usage:
+  acli jira board view [flags]
+
+Examples:
+# View board details
+$ acli jira board view --id 123
+
+
+Flags:
+  -h, --help        Show help for command
+      --id string   ID of the board to view (required)
+      --json        Output in JSON format
+
+===== acli jira dashboard
+Jira dashboard commands.
+
+Usage:
+  acli jira dashboard [command]
+
+Available Commands:
+  search      Searches for Jira dashboards.
+
+Flags:
+  -h, --help   Show help for command
+
+Use "acli jira dashboard [command] --help" for more information about a command.
+
+===== acli jira dashboard search
+Searches for the Jira dashboards. When multiple search parameters are present, the search ensures that all the parameters are satisfied.
+
+Usage:
+  acli jira dashboard search [flags]
+
+Examples:
+# Searches for the Jira dashboards
+$ acli jira dashboard search
+$ acli jira dashboard search --paginate --csv
+$ acli jira dashboard search --limit 5 --json
+
+# Filter dashboards by owner and project name
+$ acli jira dashboard search --owner user@atlassian.com --name 'report'
+
+Flags:
+      --csv            Generate a CSV output
+  -h, --help           Show help for command
+      --json           Generate a JSON output
+  -l, --limit int      Maximum number of dashboards to fetch (default 30)
+  -n, --name string    String used to perform a case-insensitive partial match with the dashboard name
+  -e, --owner string   Searches for the dashboards that are owned by the provided email
+      --paginate       Fetch all dashboards by paginating through the results
+
+===== acli jira field
+Jira field commands.
+
+Usage:
+  acli jira field [command]
+
+Available Commands:
+  cancel-delete [DEPRECATED] Restores the field from the trash.
+  create        Create a custom field in Jira.
+  delete        Moves a custom field to trash.
+  restore       Restores the field from the trash.
+  update        Update a custom field in Jira.
+
+Flags:
+  -h, --help   Show help for command
+
+Use "acli jira field [command] --help" for more information about a command.
+
+===== acli jira field cancel-delete
+DEPRECATED: this command is deprecated and will be removed in a future release. It will be removed on 2026-12-01. Deprecated since 2026-05-13.
+Use 'acli jira field restore' instead.
+
+Usage:
+  acli jira field cancel-delete [flags]
+
+Examples:
+# Restores the field from the trash
+$ acli jira field cancel-delete --id customfield_12345
+
+
+Flags:
+  -h, --help        Show help for command
+      --id string   The ID of a custom field to remove from the trash.
+
+===== acli jira field create
+Create a custom field in Jira.
+
+Usage:
+  acli jira field create [flags]
+
+Examples:
+# Create a text field
+$ acli jira field create --name "Customer Name" --type "com.atlassian.jira.plugin.system.customfieldtypes:textfield"
+
+# Create a select field with searcher
+$ acli jira field create --name "Priority Level" --type "com.atlassian.jira.plugin.system.customfieldtypes:select" --searcher-key "com.atlassian.jira.plugin.system.customfieldtypes:multiselectsearcher"
+
+# Create a field with description
+$ acli jira field create --name "Release Date" --type "com.atlassian.jira.plugin.system.customfieldtypes:datepicker" --description "The planned release date for this feature"
+
+
+Flags:
+      --description string    Description of the custom field
+  -h, --help                  Show help for command
+      --json                  Output in JSON format
+      --name string           Name of the custom field
+      --searcher-key string   Searcher key for the custom field
+      --type string           Type of the custom field
+
+===== acli jira field delete
+Moves a custom field to trash.
+
+Usage:
+  acli jira field delete [flags]
+
+Examples:
+# Delete a field
+$ acli jira field delete --id customfield_12345
+
+
+Flags:
+  -h, --help        Show help for command
+      --id string   The ID of a custom field.
+
+===== acli jira field restore
+Restores the field from the trash.
+
+Usage:
+  acli jira field restore [flags]
+
+Examples:
+# Restores the field from the trash
+$ acli jira field restore --id customfield_12345
+
+
+Flags:
+  -h, --help        Show help for command
+      --id string   The ID of a custom field to remove from the trash.
+
+===== acli jira field update
+Update a custom field in Jira.
+
+Usage:
+  acli jira field update [flags]
+
+Examples:
+# Update a field's name
+$ acli jira field update --id customfield_12345 --name "yetanotherlabel2"
+
+# Update a field's name and description
+$ acli jira field update --id customfield_12345 --name "New Name" --description "Updated description"
+
+# Update a field from a JSON file
+$ acli jira field update --id customfield_12345 --from-json field-update.json
+
+# Output result in JSON format
+$ acli jira field update --id customfield_12345 --name "New Name" --json
+
+
+Flags:
+      --description string    New description of the custom field
+      --from-json string      Read update payload from a JSON file
+  -h, --help                  Show help for command
+      --id string             The ID of the custom field to update
+      --json                  Output in JSON format
+      --name string           New name of the custom field
+      --searcher-key string   New searcher key for the custom field
+
+===== acli jira filter
+Jira filter commands.
+
+Usage:
+  acli jira filter [command]
+
+Available Commands:
+  add-favourite Add a filter as favourite.
+  change-owner  Change the owner of the provided filters.
+  get           [DEPRECATED] Retrieve a Jira filter by its ID.
+  get-columns   [DEPRECATED] Get configured columns for a filter.
+  list          List filter that are either my or favourite.
+  list-columns  List configured columns for a filter.
+  reset-columns Reset configured columns for a filter.
+  search        Searches for Jira filters.
+  update        Update an existing Jira filter.
+  view          View a Jira filter by its ID.
+
+Flags:
+  -h, --help   Show help for command
+
+Use "acli jira filter [command] --help" for more information about a command.
+
+===== acli jira filter add-favourite
+Add a filter as favourite.
+
+Usage:
+  acli jira filter add-favourite [flags]
+
+Examples:
+# Add a filter as favourite
+$ acli jira filter add-favourite --filter-id 10001
+
+
+Flags:
+      --filter-id string   Filter Id of the filter to be added as favourite
+  -h, --help               Show help for command
+
+===== acli jira filter change-owner
+Change the owner of the provided filters.
+
+Usage:
+  acli jira filter change-owner [flags]
+
+Examples:
+# Change the owner of the provided filters
+$ acli jira filter change-owner --id 123,1234,12345 --owner anna@pandora.com
+
+
+Flags:
+  -f, --from-file string   Provide the list of filter IDs in a file
+  -h, --help               Show help for command
+      --id string          Filter IDs for which owner should be changed
+      --ignore-errors      Ignore the errors and continue
+      --json               Generate a JSON output
+      --owner string       Email of the new owner of the filter
+
+===== acli jira filter get
+DEPRECATED: this command is deprecated and will be removed in a future release. It will be removed on 2026-12-01. Deprecated since 2026-05-13.
+Use 'acli jira filter view' instead.
+
+Usage:
+  acli jira filter get [flags]
+
+Examples:
+# Get filter by ID
+$ acli jira filter get --id 12345
+
+# Get filter in JSON format
+$ acli jira filter get --id 12345 --json
+
+# Open filter in web browser
+$ acli jira filter get --id 12345 --web
+
+
+Flags:
+  -h, --help        Show help for command
+      --id string   Filter ID to retrieve
+      --json        Output in JSON format
+      --web         Opens the web browser with the search URL for the filter
+
+===== acli jira filter get-columns
+DEPRECATED: this command is deprecated and will be removed in a future release. It will be removed on 2026-12-01. Deprecated since 2026-05-13.
+Use 'acli jira filter list-columns' instead.
+
+Usage:
+  acli jira filter get-columns [flags]
+
+Examples:
+# Get configured columns for a filter (table format)
+$ acli jira filter get-columns --key FILTER-123
+
+# Get configured columns for a filter (JSON format)
+$ acli jira filter get-columns --key FILTER-123 --json
+
+
+Flags:
+  -h, --help         Show help for command
+      --json         Output in JSON format
+      --key string   Filter ID or key to list the configured columns for
+
+===== acli jira filter list
+List filter that are either my or favourite.
+
+Usage:
+  acli jira filter list [flags]
+
+Examples:
+# List my filters
+$ acli jira filter list --my
+
+# List my favourite filters
+$ acli jira filter list --favourite
+
+
+Flags:
+      --favourite   List my favourite filters
+  -h, --help        Show help for command
+      --json        Output in JSON format
+      --my          List my filters
+
+===== acli jira filter list-columns
+List configured columns for a filter.
+
+Usage:
+  acli jira filter list-columns [flags]
+
+Examples:
+# List configured columns for a filter (table format)
+$ acli jira filter list-columns --key FILTER-123
+
+# List configured columns for a filter (JSON format)
+$ acli jira filter list-columns --key FILTER-123 --json
+
+
+Flags:
+  -h, --help         Show help for command
+      --json         Output in JSON format
+      --key string   Filter ID or key to list the configured columns for
+
+===== acli jira filter reset-columns
+Reset configured columns for a filter.
+
+Usage:
+  acli jira filter reset-columns [flags]
+
+Examples:
+# Reset configured columns for a filter (table format)
+$ acli jira filter reset-columns --id FILTER-123
+
+
+Flags:
+  -h, --help        Show help for command
+      --id string   Filter ID to reset the configured columns for
+
+===== acli jira filter search
+Searches for Jira filters. When multiple search parameters are present, the search ensures that all the parameters are satisfied.
+
+Usage:
+  acli jira filter search [flags]
+
+Examples:
+# Searches for the Jira filters
+$ acli jira filter search
+$ acli jira filter search --paginate --csv
+$ acli jira filter search --limit 5 --json
+
+# Filter dashboards by owner and project name
+$ acli jira filter search --owner user@atlassian.com --name 'report'
+
+Flags:
+      --csv            Generate a CSV output
+  -h, --help           Show help for command
+      --json           Generate a JSON output
+  -l, --limit int      Maximum number of filters to fetch (default 30)
+  -n, --name string    String used to perform a case-insensitive partial match with the filter name
+  -e, --owner string   Searches for the filters that are owned by the provided email
+      --paginate       Fetch all filters by paginating through the results
+
+===== acli jira filter update
+Update an existing Jira filter.
+
+Usage:
+  acli jira filter update [flags]
+
+Examples:
+# Update filter name
+$ acli jira filter update --id 10001 --name "My Updated Filter"
+
+# Update multiple fields at once
+$ acli jira filter update --id 10001 --name "New Name" --description "New description" --jql "project = TEST AND status = Open"
+
+# Output result in JSON format
+$ acli jira filter update --id 10001 --name "Updated Filter" --json
+
+
+Flags:
+      --description string         New description for the filter
+      --edit-permissions string    JSON array of SharePermission objects defining the groups and projects that can edit the filter
+  -h, --help                       Show help for command
+      --id string                  The ID of the filter to update
+      --jql string                 New JQL query for the filter
+      --json                       Output in JSON format
+      --name string                New name for the filter
+      --share-permissions string   JSON array of SharePermission objects defining the groups and projects that the filter is shared with.
+
+===== acli jira filter view
+View a Jira filter by its ID.
+
+Usage:
+  acli jira filter view [flags]
+
+Examples:
+# View filter by ID
+$ acli jira filter view --id 12345
+
+# View filter in JSON format
+$ acli jira filter view --id 12345 --json
+
+# Open filter in web browser
+$ acli jira filter view --id 12345 --web
+
+
+Flags:
+  -h, --help        Show help for command
+      --id string   Filter ID to retrieve
+      --json        Output in JSON format
+      --web         Opens the web browser with the search URL for the filter
+
+===== acli jira project
+Jira project commands.
+
+Usage:
+  acli jira project [command]
+
+Available Commands:
+  archive     Archives a Jira project.
+  create      Create a Jira project – a collection of work items.
+  delete      Deletes a Jira project.
+  list        List of projects visible to the user.
+  restore     Restore a Jira project.
+  update      Update a Jira project.
+  view        Fetches a Jira project.
+
+Flags:
+  -h, --help   Show help for command
+
+Use "acli jira project [command] --help" for more information about a command.
+
+===== acli jira project archive
+Archives a Jira project.
+
+Usage:
+  acli jira project archive [flags]
+
+Examples:
+$ acli jira project archive --key "TEAM"
+
+Flags:
+  -h, --help         Show help for command
+      --key string   Key of the project to be archived
+
+===== acli jira project create
+Create a Jira project which is a collection of work items (stories, bugs, tasks, etc). You would typically use a project to represent the development work for a product, project, or service in Jira.
+
+Usage:
+  acli jira project create [flags]
+
+Examples:
+# Create a project from an existing project
+$ acli jira project create --from-project "TEAM" --key "NEWTEAM" --name "New Project"
+
+# Provide optional fields in --from-project
+$ acli jira project create --from-project "TEAM" --key "NEWTEAM" --name "New Project" --description "New project description" --url "https://example.com" --lead-email "user@atlassian.com"
+
+# Generate a JSON file that could be used for project creation via --from-json flag
+$ acli jira project create --generate-json
+
+# Create a project from a JSON file
+$ acli jira project create --from-json "project.json"
+
+Flags:
+  -d, --description string    Supply a description for the project
+  -j, --from-json string      Read project details from a JSON file
+  -f, --from-project string   Create a project from an existing project. Only company managed projects can be used to clone a new project.
+  -g, --generate-json         Generates a JSON file that could be used for project creation
+  -h, --help                  Show help for command
+  -k, --key string            Key of the project to be created
+  -l, --lead-email string     Lead account user email (If not provided, the lead will be same as that of parent project)
+  -n, --name string           Name of the project to be created
+  -u, --url string            URL of the project
+
+===== acli jira project delete
+Deletes a Jira project.
+
+Usage:
+  acli jira project delete [flags]
+
+Examples:
+$ acli jira project delete --key "TEAM"
+
+Flags:
+  -h, --help         Show help for command
+      --key string   Key of the project to be deleted
+
+===== acli jira project list
+List of projects visible to the user.
+
+Usage:
+  acli jira project list [flags]
+
+Examples:
+# List up to 20 projects recently viewed
+$ acli jira project list --recent
+
+# List all projects
+$ acli jira project list --paginate
+
+# List 50 projects and output in JSON format
+$ acli jira project list --limit 50 --json
+
+Flags:
+  -h, --help        Show help for command
+      --json        Generate a JSON output
+  -l, --limit int   Maximum number of projects to fetch (default 30)
+      --paginate    HTTP requests to fetch all pages of results. The '--limit' is ignored
+      --recent      Returns a list of up to 20 projects recently viewed by the user
+
+===== acli jira project restore
+Restore a Jira project.
+
+Usage:
+  acli jira project restore [flags]
+
+Examples:
+$ acli jira project restore --key "TEAM"
+
+Flags:
+  -h, --help         Show help for command
+      --key string   Key of the project to restore
+
+===== acli jira project update
+Update a Jira project.
+
+Usage:
+  acli jira project update [flags]
+
+Examples:
+# Update project key and name
+$ acli jira project update --project-key "TEAM1" --key "TEAM" --name "New Name"
+
+# Generate a JSON file that could be used for project update via --from-json flag
+$ acli jira project update --generate-json
+
+# Update project from a JSON file
+$ acli jira project update --project-key "TEAM1" --from-json "project.json"
+
+Flags:
+  -d, --description string   New description of the project
+  -j, --from-json string     Read updated project details from a json file
+  -g, --generate-json        Generates a JSON file that could be used for project update
+  -h, --help                 Show help for command
+  -k, --key string           New key of the project
+  -l, --lead-email string    New lead account user email
+  -n, --name string          New name of the project
+  -p, --project-key string   Key of the project to be updated
+  -u, --url string           New URL of the project
+
+===== acli jira project view
+Fetches a Jira project.
+
+Usage:
+  acli jira project view [flags]
+
+Examples:
+# Fetches a project details with given key
+$ acli jira project view --key "TEAM"
+$ acli jira project view --key "TEAM" --json
+
+
+Flags:
+  -h, --help         Show help for command
+  -j, --json         Output in JSON format
+      --key string   Key of the project to be fetched
+
+===== acli jira sprint
+Jira sprint commands.
+
+Usage:
+  acli jira sprint [command]
+
+Available Commands:
+  create         Create a new sprint on the board.
+  delete         Deletes one or more Jira sprints.
+  list-workitems List work items in a sprint.
+  update         Update an existing Jira sprint.
+  view           View details of a Jira sprint.
+
+Flags:
+  -h, --help   Show help for command
+
+Use "acli jira sprint [command] --help" for more information about a command.
+
+===== acli jira sprint create
+Create a new sprint on the board.
+
+Usage:
+  acli jira sprint create [flags]
+
+Examples:
+# Create a sprint with only required fields
+$ acli jira sprint create --name "Sprint 1" --board 5
+
+# Create a sprint with start and end dates
+$ acli jira sprint create --name "Sprint 2" --board 5 --start 2025-01-01 --end 2025-01-14
+
+# Create a sprint with a goal
+$ acli jira sprint create --name "Release Planning" --board 10 --goal "Prepare for Q1 release"
+
+# Create a sprint and output in JSON format
+$ acli jira sprint create --name "Sprint 3" --board 5 --json
+
+
+Flags:
+      --board int      Origin board ID where the sprint will be created (required)
+      --end string     Sprint end date (ISO 8601 format, e.g., 2025-01-14 or 2025-01-14T09:00:00Z)
+      --goal string    Sprint goal text
+  -h, --help           Show help for command
+      --json           Output in JSON format
+      --name string    Name of the sprint (required)
+      --start string   Sprint start date (ISO 8601 format, e.g., 2025-01-01 or 2025-01-01T09:00:00Z)
+
+===== acli jira sprint delete
+Deletes one or more Jira sprints.
+
+Usage:
+  acli jira sprint delete [flags]
+
+Examples:
+# Delete a single sprint by ID
+acli jira sprint delete --id 37
+
+# Delete multiple sprints by ID
+acli jira sprint delete --id 37,42,55
+
+
+Flags:
+  -h, --help        Show help for command
+      --id string   One or more sprint IDs to delete (required)
+      --yes         Confirm sprint deletion without prompting
+
+===== acli jira sprint list-workitems
+List work items in a sprint.
+
+Usage:
+  acli jira sprint list-workitems [flags]
+
+Examples:
+# List work items in sprint
+$ acli jira sprint list-workitems --sprint 1 --board 6
+
+
+Flags:
+      --board int       Id of the board to list work items from (required)
+      --csv             Output in CSV format
+      --fields string   Comma-separated list of fields to include in the response (default "key,issuetype,summary,assignee,priority,status")
+  -h, --help            Show help for command
+      --jql string      JQL query to filter work items in the sprint
+      --json            Output in JSON format
+      --limit int       Maximum number of issues to return per page (default 50)
+      --paginate        Continue paginating to fetch all pages of results or up to the provided limit.
+      --sprint int      Id of the sprint to list work items from (required)
+
+===== acli jira sprint update
+Update an existing Jira sprint.
+
+Usage:
+  acli jira sprint update [flags]
+
+Examples:
+# Update sprint name
+$ acli jira sprint update --id 37 --name "Sprint 1 - Final"
+
+# Update sprint name and goal
+$ acli jira sprint update --id 37 --name "Sprint 1 - Final" --goal "Complete all Q1 features"
+
+# Update sprint state to closed
+$ acli jira sprint update --id 37 --state closed
+
+# Update sprint dates
+$ acli jira sprint update --id 37 --start "2025-01-01" --end "2025-01-14"
+
+# Output result in JSON format
+$ acli jira sprint update --id 37 --name "Updated Sprint" --json
+
+
+Flags:
+      --board int              Board ID where the sprint belongs
+      --complete-date string   Sprint complete date (ISO 8601 format)
+      --end string             Sprint end date (ISO 8601 format)
+      --goal string            Sprint goal text
+  -h, --help                   Show help for command
+      --id string              ID of the sprint to update (required)
+      --json                   Output in JSON format
+      --name string            New name for the sprint
+      --start string           Sprint start date (ISO 8601 format)
+      --state string           Sprint state (future, active, closed)
+
+===== acli jira sprint view
+View details of a Jira sprint.
+
+Usage:
+  acli jira sprint view [flags]
+
+Examples:
+# View sprint details by ID
+$ acli jira sprint view --id 123
+
+# View sprint in JSON format
+$ acli jira sprint view --id 123 --json
+
+
+Flags:
+  -h, --help        Show help for command
+      --id string   ID of the sprint to view (required)
+      --json        Output in JSON format
+
+===== acli jira workitem
+Jira work item commands.
+
+Usage:
+  acli jira workitem [command]
+
+Available Commands:
+  archive       Archives a work item or multiple work items.
+  assign        Assign a work item(s) to an assignee(s).
+  attachment    Work item attachments commands.
+  clone         Create a duplicate work item(s).
+  comment       Work item comments commands.
+  create        Create a Jira work item.
+  create-bulk   Bulk create Jira issues.
+  delete        Delete a work item or multiple work items.
+  edit          Edit a Jira work item or multiple work items.
+  link          Link work items commands.
+  list-watchers List watchers of an issue
+  search        Searches for work item or multiple work items.
+  transition    Transitioning a work item.
+  unarchive     Unarchives work item or multiple work items.
+  view          Retrieve information about Jira work items.
+  watcher       Work item watcher commands.
+
+Flags:
+  -h, --help   Show help for command
+
+Use "acli jira workitem [command] --help" for more information about a command.
+
+===== acli jira workitem archive
+Archives a work item or multiple work items. Archive a work item if you want to remove it from your project without deleting it. If you archive a work item, it will only appear in Archived work items and can no longer be edited. You can restore an archived work item if you need it in the future.
+
+Usage:
+  acli jira workitem archive [flags]
+
+Examples:
+# Archive work item with work item keys
+$ acli jira workitem archive --key "KEY-1,KEY-2"
+
+# Archive work item with JQL query
+$ acli jira workitem archive --jql "project = TEAM"
+
+# Archive work item with filter ID
+$ acli jira workitem archive --filter 10001
+
+# Archive work item from file
+$ acli jira workitem archive --from-file "issues.txt" --yes
+
+Flags:
+      --filter string      Filter ID of work items to be archived
+  -f, --from-file string   Read the files to be archived from the file. The file may contain work item IDs, work item keys separated by commas, white spaces, or new lines
+  -h, --help               Show help for command
+      --ignore-errors      Ignore the errors and continue
+      --jql string         JQL query for work items to be archived
+      --json               Generate a JSON output
+  -k, --key string         A list of work item keys to be archived
+  -y, --yes                Confirm archival without prompting
+
+===== acli jira workitem assign
+Assign a work item to an assignee or multiple work items to multiple assignees.
+
+Usage:
+  acli jira workitem assign [flags]
+
+Examples:
+# Assign work item with work item key
+$ acli jira workitem assign --key "KEY-1" --assignee "@me"
+
+# Assign work item with JQL query
+$ acli jira workitem assign --jql "project = TEAM" --assignee "user@atlassian.com"
+
+# Assign work item with filter ID
+$ acli jira workitem assign --filter 10001 --assignee "default"
+
+# Assign work item from file
+$ acli jira workitem assign --from-file "issues.txt" --remove-assignee --json
+
+Flags:
+  -a, --assignee string    Assign work item with email or account ID. Use '@me' to self-assign, 'default' to assign to the project's default assignee
+      --filter string      Filter ID of work items to be assigned
+  -f, --from-file string   Reads the work items to be assigned from the file. The file may contain work items IDs or keys separated by commas, white spaces, or new lines
+  -h, --help               Show help for command
+      --ignore-errors      Ignore the errors and continue
+      --jql string         JQL query for work items to be assigned
+      --json               Generate a JSON output
+  -k, --key string         A list of work item keys to be assigned
+      --remove-assignee    Remove assignee
+  -y, --yes                Confirm assign without prompting
+
+===== acli jira workitem attachment
+Work item attachments commands.
+
+Usage:
+  acli jira workitem attachment [command]
+
+Available Commands:
+  delete      Delete an attachment from a workitem.
+  list        List all the attachments of a workitem.
+
+Flags:
+  -h, --help   Show help for command
+
+Use "acli jira workitem attachment [command] --help" for more information about a command.
+
+===== acli jira workitem attachment delete
+Delete an attachment from a workitem.
+
+Usage:
+  acli jira workitem attachment delete [flags]
+
+Examples:
+# Delete work item attachment
+$ acli jira workitem attachment delete --id 12345
+
+
+Flags:
+  -h, --help        Show help for command
+      --id string   Id of the attachment to be deleted
+
+===== acli jira workitem attachment list
+List all the attachments of a workitem.
+
+Usage:
+  acli jira workitem attachment list [flags]
+
+Examples:
+# List work item attachment
+$ acli jira workitem attachment list --key TEST-123
+
+
+Flags:
+  -h, --help         Show help for command
+      --json         Output in JSON format
+      --key string   Workitem key to list the attachments for
+
+===== acli jira workitem clone
+Create a duplicate of a work item or multiple work items by cloning within the same project or site, copying over most information from a work item like the Summary and Description fields and more.
+
+Usage:
+  acli jira workitem clone [flags]
+
+Examples:
+# Clone work item with work item keys
+$ acli jira workitem clone --key "KEY-1,KEY-2" --to-project "TEAM"
+
+Flags:
+      --filter string       Filter id of work items to be cloned
+  -f, --from-file string    Reads the work item to be cloned from the file. The file may contain work item ids, work item keys separated by commas, white spaces, or new lines
+  -h, --help                Show help for command
+      --ignore-errors       Ignore the errors and continue
+      --jql string          JQL query for work items to clone
+      --json                Generate a JSON output
+  -k, --key string          A list of work item keys to be cloned
+      --to-project string   Target Jira project for cloning
+      --to-site string      Target site for cloning the work items. The default is currently an authenticated site
+  -y, --yes                 Confirm cloning without prompting
+
+===== acli jira workitem comment
+Work item comments commands.
+
+Usage:
+  acli jira workitem comment [command]
+
+Available Commands:
+  create      Create a comment on work items
+  delete      Delete a comment for a given workitem
+  list        List comments for a work item.
+  update      Update a comment on a work item.
+  visibility  Get visibility options for work item comments.
+
+Flags:
+  -h, --help   Show help for command
+
+Use "acli jira workitem comment [command] --help" for more information about a command.
+
+===== acli jira workitem comment create
+Add a comment to a work item or multiple work items using the default visibility for the project.
+
+Usage:
+  acli jira workitem comment create [flags]
+
+Examples:
+# Comment on work item with work item keys
+$ acli jira workitem comment --key "KEY-1" --body "This is a comment"
+
+# Comment on work item with JQL query and plain text file 
+$ acli jira workitem comment --jql "project = TEAM" --body-file "comment.txt" --edit-last
+
+# Comment on work item with JQL query
+$ acli jira workitem comment --jql "project = TEAM" --editor
+
+Flags:
+  -b, --body string        Comment body in plain text or Atlassian Document Format (ADF)
+  -F, --body-file string   Plain text file with text or Atlassian Document Format (ADF)
+  -e, --edit-last          Edit the last comment from the same author
+      --editor             Skip prompts and open the text editor to write the body
+      --filter string      Filter ID of work items to comment
+  -h, --help               Show help for command
+      --ignore-errors      Ignore the errors and continue
+      --jql string         JQL query for work items to comment
+      --json               Generate a JSON output
+  -k, --key string         A list of work item keys to comment
+
+===== acli jira workitem comment delete
+Delete a comment for a given workitem
+
+Usage:
+  acli jira workitem comment delete [flags]
+
+Examples:
+# Delete workitem comments
+$ acli jira workitem comment delete --issue TEST-1 --id 10023
+
+
+Flags:
+  -h, --help         Show help for command
+      --id string    Id of the comment to be deleted
+      --key string   Workitem key to delete the links for
+
+===== acli jira workitem comment list
+List comments for a work item.
+
+Usage:
+  acli jira workitem comment list [flags]
+
+Examples:
+# List work item comments
+$ acli jira workitem comment list --key TEST-123
+
+
+Flags:
+  -h, --help           Show help for command
+      --json           Output in JSON format
+      --key string     Work item key to list comments for
+      --limit int      Maximum number of comments to return per page (default 50)
+      --order string   Order comments by field (created, updated) (default "+created")
+      --paginate       Continue paginating to fetch all pages of results. The --limit is ignored
+
+===== acli jira workitem comment update
+Update a comment on a work item.
+
+Usage:
+  acli jira workitem comment update [flags]
+
+Examples:
+# Update comment body
+$ acli jira workitem comment update --key TEST-123 --id 10001 --body "Updated comment text"
+
+# Update comment from file
+$ acli jira workitem comment update --key TEST-123 --id 10001 --body-file comment.txt
+
+# Update comment with ADF format
+$ acli jira workitem comment update --key TEST-123 --id 10001 --body-adf comment.json
+
+# Update comment with role visibility
+$ acli jira workitem comment update --key TEST-123 --id 10001 --body "Internal comment" --visibility-role "Administrators"
+
+# Update comment with group visibility and notifications
+$ acli jira workitem comment update --key TEST-123 --id 10001 --body "Team update" --visibility-group "dev-team" --notify
+
+
+Flags:
+  -b, --body string               Comment body text
+      --body-adf string           Body in Atlassian Document Format (JSON file)
+  -F, --body-file string          Plain text file containing comment body
+  -h, --help                      Show help for command
+      --id string                 The work item comment ID to be updated
+      --key string                The work item key to be updated
+      --notify                    Notifies users about the change
+      --visibility-group string   Set comment visibility to a specific group
+      --visibility-role string    Set comment visibility to a specific role
+
+===== acli jira workitem comment visibility
+Get visibility options for work item comments.
+
+Usage:
+  acli jira workitem comment visibility [flags]
+
+Examples:
+# Get project roles for visibility
+$ acli jira workitem comment visibility --role --project PROJ-123
+
+# List available groups for visibility
+$ acli jira workitem comment visibility --group
+
+
+Flags:
+      --group            List available groups for comment visibility
+  -h, --help             Show help for command
+      --project string   Project key to get roles for (required when using --role)
+      --role             Get project roles for comment visibility
+
+===== acli jira workitem create
+Create a Jira work item to track individual pieces of work that must be completed.
+
+Usage:
+  acli jira workitem create [flags]
+
+Examples:
+# Create work item by supplying a summary, project name and work item type
+$ acli jira workitem create --summary "New Task" --project "TEAM" --type "Task"
+
+# Create work item from file and supplying all work item details
+$ acli jira workitem create --from-file "workitem.txt" --project "PROJ" --type "Bug" --assignee "user@atlassian.com" --label "bug,cli"
+
+# Generate a JSON file that could be used for workitem creation via --from-json flag
+$ acli jira workitem create --generate-json
+
+# Create work item from a JSON file
+$ acli jira workitem create --from-json "workitem.json"
+
+Flags:
+  -a, --assignee string           Assign people by their email or account ID. Use '@me' to self-assign, 'default' to assign to the project's default assignee
+  -d, --description string        Supply a description in plain text or Atlassian Document Format (ADF)
+      --description-file string   Read the description in plain text or Atlassian Document Format (ADF) from the file
+  -e, --editor                    Open a text editor to specify the summary and description
+  -f, --from-file string          Read the work item summary, description from a file
+      --from-json string          Read the work item definition from a JSON file
+      --generate-json             Generates a JSON file that could be used for work item creation
+  -h, --help                      Show help for command
+      --json                      Output in JSON
+  -l, --label strings             Add labels by name and comma-separated
+      --parent string             Parent work item ID
+  -p, --project string            Add the work item to projects by project key
+  -s, --summary string            Supply a summary for the work item
+  -t, --type string               Defines the work item type of the created work item. For example, Epic, Story, Task, Bug
+
+===== acli jira workitem create-bulk
+Bulk create Jira issues.
+
+Usage:
+  acli jira workitem create-bulk [flags]
+
+Examples:
+# Create issues from a JSON file
+$ acli jira workitem create-bulk --from-json issues.json
+
+# Create issues from a CSV file
+$ acli jira workitem create-bulk --from-csv issues.csv
+
+# Generate an example JSON input structure
+$ acli jira workitem create-bulk --generate-json
+
+
+Flags:
+      --from-csv string    Read issues from a CSV file where columns represent issue fields (summary, projectKey, issueType, description, label, parentIssueId, assignee)
+      --from-json string   Read issues from a JSON file containing an array of issue objects
+      --generate-json      Prints an example JSON structure to be used with --from-json
+  -h, --help               Show help for command
+      --ignore-errors      Ignore errors and continue with the next issue
+      --yes                Confirm bulk creation without prompting
+
+===== acli jira workitem delete
+Delete a work item or multiple work items.
+
+Usage:
+  acli jira workitem delete [flags]
+
+Examples:
+# Delete work item with work item keys
+$ acli jira workitem delete --key "KEY-1,KEY-2"
+
+# Delete work item with JQL query
+$ acli jira workitem delete --jql "project = TEAM"
+
+# Delete work item with Filter ID
+$ acli jira workitem delete --filter 10001
+
+# Delete work item by reading from a file
+$ acli jira workitem delete --from-file "issues.txt" --yes
+
+Flags:
+      --filter string      Filter ID of work items to be deleted
+  -f, --from-file string   Reads the work items to be deleted from the file. The file may contain work item IDs or keys separated by commas, white spaces, or new lines
+  -h, --help               Show help for command
+      --ignore-errors      Ignore the errors and continue
+      --jql string         JQL query for work items to be deleted
+      --json               Generate a JSON output
+  -k, --key string         A list of work item keys to be deleted
+  -y, --yes                Confirm delete without prompting
+
+===== acli jira workitem edit
+Edit a Jira work item or multiple work items.
+
+Usage:
+  acli jira workitem edit [flags]
+
+Examples:
+# Edit work item with work item keys
+$ acli jira workitem edit --key "KEY-1,KEY-2" --summary "New Summary"
+
+# Edit work item with JQL query
+$ acli jira workitem edit --jql "project = TEAM" --assignee "user@atlassian.com"
+
+# Edit work item with Filter ID
+$ acli jira workitem edit --filter 10001 --description "Updated description" --yes
+
+# Generate a JSON file that could be used for workitem edit via --from-json flag
+$ acli jira workitem edit --generate-json
+
+# Edit work item from a JSON file
+$ acli jira workitem edit --from-json "workitem.json"
+
+Flags:
+  -a, --assignee string           Assign work item with email or account ID. Use '@me' to self-assign, 'default' to assign to the project's default assignee
+  -d, --description string        Edit the description in plain text or Atlassian Document Format (ADF)
+      --description-file string   Read the description in plain text or Atlassian Document Format (ADF) from the file
+      --filter string             Filter ID of work items to be edited
+      --from-json string          Read the work item definition from a JSON file
+      --generate-json             Generates a JSON file that could be used for work item editing
+  -h, --help                      Show help for command
+      --ignore-errors             Ignore the errors and continue
+      --jql string                JQL query for work items to be edited
+      --json                      Generate a JSON output
+  -k, --key string                A list of work item keys to be edited
+  -l, --labels string             Edit the labels
+      --remove-assignee           Remove the assignee
+      --remove-labels string      Remove the labels
+  -s, --summary string            Edit the summary
+  -t, --type string               Edit the work item type
+  -y, --yes                       Confirm edit without prompting
+
+===== acli jira workitem link
+Link work items commands.
+
+Usage:
+  acli jira workitem link [command]
+
+Available Commands:
+  create      Create links between work items.
+  delete      Delete links between work items.
+  list        List all the links of a workitem.
+  type        Get available workitem link types.
+
+Flags:
+  -h, --help   Show help for command
+
+Use "acli jira workitem link [command] --help" for more information about a command.
+
+===== acli jira workitem link create
+Create links between work items.
+
+Usage:
+  acli jira workitem link create [flags]
+
+Examples:
+# Create a link between two work items
+$ acli jira workitem link create --out KEY-123 --in KEY-456 --type Blocks
+
+# Create multiple links from a JSON file
+$ acli jira workitem link create --from-json links.json
+
+# Generate an example JSON input structure
+$ acli jira workitem link create --generate-json
+
+
+Flags:
+      --from-csv string    Provide the input as a comma-separated table, where the first column is outward work item IDs, the second column is inward work item IDs, and the third column is linking type. The first row is ignored being the description.
+      --from-json string   Read a JSON file for mapping work items, linking work items, and linking types
+      --generate-json      Prints an example JSON structure to be used with --from-json
+  -h, --help               Show help for command
+      --ignore-errors      Ignore the errors and continue with the next work item
+      --in string          Inward work item ID.
+      --out string         Outward work item ID.
+      --type string        Work items linking type. Accepts outward descriptions
+      --yes                Confirm link creation without prompting
+
+===== acli jira workitem link delete
+Delete links between work items.
+
+Usage:
+  acli jira workitem link delete [flags]
+
+Examples:
+# Delete a link between two work items
+$ acli jira workitem link delete --id 10001
+
+# Delete multiple links from a JSON file
+$ acli jira workitem link delete --from-json links.json
+
+# Delete multiple links from a CSV file
+$ acli jira workitem link delete --from-csv links.csv
+
+
+Flags:
+      --from-csv string    Read a CSV file for Link IDs to delete
+      --from-json string   Read a JSON file for Link IDs to delete
+  -h, --help               Show help for command
+      --id string          Link IDs to delete
+      --ignore-errors      Ignore the errors and continue with the next link
+      --yes                Confirm link deletion without prompting
+
+===== acli jira workitem link list
+List all the links of a workitem.
+
+Usage:
+  acli jira workitem link list [flags]
+
+Examples:
+# List work item links
+$ acli jira workitem link list --key TEST-123
+
+
+Flags:
+  -h, --help         Show help for command
+      --json         Output in JSON format
+      --key string   Workitem key to list the links for
+
+===== acli jira workitem link type
+Get available workitem link types.
+
+Usage:
+  acli jira workitem link type [flags]
+
+Examples:
+# Get available workitem link types
+$ acli jira workitem link type
+
+
+Flags:
+  -h, --help   Show help for command
+      --json   Output in JSON format
+
+===== acli jira workitem list-watchers
+List watchers of an issue
+
+Usage:
+  acli jira workitem list-watchers [flags]
+
+Examples:
+# List watchers of an issue
+$ acli jira workitem list-watchers --key TEST-1
+
+
+Flags:
+  -h, --help         Show help for command
+      --json         Output in JSON format
+      --key string   Issue key to list watchers for
+
+===== acli jira workitem search
+Searches for work item or multiple work items.
+
+Usage:
+  acli jira workitem search [flags]
+
+Examples:
+# Search for work items with JQL query
+$ acli jira workitem search --jql "project = TEAM" --paginate
+$ acli jira workitem search --jql "project = TEAM" --count
+$ acli jira workitem search --jql "project = TEAM" --fields "key,summary,assignee" --csv
+$ acli jira workitem search --jql "project = TEAM" --limit 50 --json
+# Search for work items with filter ID
+$ acli jira workitem search --filter 10001 --web
+
+
+Flags:
+      --count           Number of work items in the search
+      --csv             Generate a CSV output
+  -f, --fields string   Comma-separated list of fields to display in the output (default "issuetype,key,assignee,priority,status,summary")
+      --filter string   Filter ID of work items to be searched
+  -h, --help            Show help for command
+  -j, --jql string      JQL query to search for work items
+      --json            Generate a JSON output
+  -l, --limit int       Maximum number of work items to fetch
+      --paginate        Fetch all work items by paginating through the results
+  -w, --web             Search for work items in the web browser
+
+===== acli jira workitem transition
+Transitioning a work item can mean moving it to another status, or performing a looped transition where the transition allows you to perform an action but keep the work item in its current status.
+
+Usage:
+  acli jira workitem transition [flags]
+
+Examples:
+# Transition work item with work item keys
+$ acli jira workitem transition --key "KEY-1,KEY-2" --status "Done"
+
+# Transition work item with JQL query
+$ acli jira workitem transition --jql "project = TEAM" --status "In Progress"
+
+# Transition work item with filter ID
+$ acli jira workitem transition --filter 10001 --status "To Do" --yes
+
+Flags:
+      --filter string   Filter ID of work items to be transitioned
+  -h, --help            Show help for command
+      --ignore-errors   Ignore the errors and continue
+      --jql string      JQL query for work items to be transitioned
+      --json            Generate a JSON output
+  -k, --key string      A list of work item keys to be transitioned
+  -s, --status string   Status to transition the work item
+  -y, --yes             Confirm transition without prompting
+
+===== acli jira workitem unarchive
+Unarchives work item or multiple work items.
+
+Usage:
+  acli jira workitem unarchive [flags]
+
+Examples:
+# Unarchive work item with work item keys
+$ acli jira workitem unarchive --key "KEY-1,KEY-2"
+
+# Unarchive work item by reading from a file
+$ acli jira workitem unarchive --from-file "issues.txt" --yes
+
+Flags:
+  -f, --from-file string   Read the list of work item IDs to be unarchived from the file. The file may contain work item IDs, work item keys separated by commas, white spaces, or new lines
+  -h, --help               Show help for command
+      --ignore-errors      Ignore the errors and continue
+      --json               Generate a JSON output
+  -k, --key string         A list of work item keys to be unarchived
+  -y, --yes                Confirm unarchival without prompting
+
+===== acli jira workitem view
+Retrieve information about Jira work items.
+
+Usage:
+  acli jira workitem view [key] [flags]
+
+Examples:
+# View work item with work item keys
+$ acli jira workitem view KEY-123
+
+# View work item by reading work item keys from a JSON file
+$ acli jira workitem view KEY-123 --json
+
+# View work item with work item keys and a list of field to return
+$ acli jira workitem view KEY-123 --fields summary,comment
+
+# View work item with work item keys and view in a web browser
+$ acli jira workitem view KEY-123 --web
+
+Flags:
+  -f, --fields string   A list of fields to return for the work item. This parameter accepts a comma-separated list. Use it to retrieve a subset of fields.
+                        Allowed values:
+                        - '*all' - returns all fields
+                        - '*navigable' - returns navigable fields
+                        Any work item field, prefixed with a minus to exclude
+                        Examples:
+                        - 'summary,comment' - returns only the summary and comments fields
+                        - '-description' - returns all (default) fields except description
+                        - '*navigable,-comment' - returns all navigable fields except comment
+                         (default "key,issuetype,summary,status,assignee,description")
+  -h, --help            Show help for command
+      --json            Generate a JSON output
+  -w, --web             View the work item in the web browser.
+
+===== acli jira workitem watcher
+Work item watcher commands.
+
+Usage:
+  acli jira workitem watcher [command]
+
+Available Commands:
+  list        [DEPRECATED] List watchers of an issue
+  remove      Remove a watcher from an issue
+
+Flags:
+  -h, --help   Show help for command
+
+Use "acli jira workitem watcher [command] --help" for more information about a command.
+
+===== acli jira workitem watcher list
+DEPRECATED: this command is deprecated and will be removed in a future release. It will be removed on 2026-12-01. Deprecated since 2026-05-13.
+Use 'acli jira workitem list-watchers' instead.
+
+Usage:
+  acli jira workitem watcher list [flags]
+
+Examples:
+# List watchers of an issue
+$ acli jira workitem watcher list --key TEST-1
+
+
+Flags:
+  -h, --help         Show help for command
+      --json         Output in JSON format
+      --key string   Issue key to list watchers for
+
+===== acli jira workitem watcher remove
+Remove a watcher from an issue
+
+Usage:
+  acli jira workitem watcher remove [flags]
+
+Examples:
+# Remove watcher from issue
+$ acli jira workitem watcher remove --key TEST-1 --user 5b10ac8d82e05b22cc7d4ef5
+
+
+Flags:
+  -h, --help          Show help for command
+      --key string    Issue key to remove the watcher from
+      --user string   The account ID of the user, which uniquely identifies the user across all Atlassian products. For example, 5b10ac8d82e05b22cc7d4ef5.
+
+===== acli config
+Commands for changing configuration settings.
+
+Usage:
+  acli config [command]
+
+Available Commands:
+  gov-cloud   Atlassian Government Cloud configuration command.
+
+Flags:
+  -h, --help   Show help for command
+
+Use "acli config [command] --help" for more information about a command.
+
+===== acli config gov-cloud
+Atlassian Government Cloud configuration command.
+
+Usage:
+  acli config gov-cloud [flags]
+
+Examples:
+# Interactive mode
+$ acli config gov-cloud
+
+# Enables Atlassian Government Cloud environment
+$ acli config gov-cloud --enable
+
+# Disables Atlassian Government Cloud environment
+$ acli config gov-cloud --enable=false
+
+# Displays status of Atlassian Government Cloud environment
+$ acli config gov-cloud --status
+
+
+Flags:
+      --enable   Enable or disable Atlassian Government Cloud environment. (default true)
+  -h, --help     Show help for command
+      --status   Displays status of Atlassian Government Cloud environment.
+
+===== acli feedback
+Submit a request or report a problem.
+
+Usage:
+  acli feedback [flags]
+
+Examples:
+$ acli feedback --summary "I have a problem" --details "I have a problem with the acli" --email "user@atlassian.com"
+
+Flags:
+  -a, --attachments strings   Multiple files of attachments to be added to the request
+  -d, --details string        Details of the feedback
+  -e, --email string          Email address to receive feedback response
+  -h, --help                  Show help for command
+  -s, --summary string        Summary of the feedback
+  -t, --time string           Provide an estimated timeframe for when the problem occurred, for example --time=1h, --time=15m
+
