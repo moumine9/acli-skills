@@ -1,7 +1,7 @@
 {
   "name": "acli-skills",
   "description": "Claude Code skills and hooks for Jira — manage work items, sprints, and search via the Atlassian CLI (acli) without leaving your terminal",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "author": {
     "name": "moumine9",
     "url": "https://github.com/moumine9"
