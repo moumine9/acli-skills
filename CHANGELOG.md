@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.2] - 2026-11-02
+
+### Fixed
+
+- Allow automatic invocation of the auth, workitem, and update-acli-docs skills by removing the disable-model-invocation restriction.
+- Update the README to reflect automatic skill invocation.
+
 ## [1.1.1] - 2026-09-14
 
 ### Added
@@ -55,7 +62,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `.claude/settings.local.json` with pre-approved `acli` permissions, and a `.gitignore` that keeps tokens and credentials out of the repo.
 - README covering acli install, authentication, plugin and manual installation, and local testing with `claude --plugin-dir ./`.
 
-[unreleased]: https://github.com/moumine9/acli-skills/compare/v1.1.1...HEAD
+[unreleased]: https://github.com/moumine9/acli-skills/compare/v1.1.2...HEAD
+[1.1.2]: https://github.com/moumine9/acli-skills/compare/v1.1.1...v1.1.2
 [1.1.1]: https://github.com/moumine9/acli-skills/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/moumine9/acli-skills/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/moumine9/acli-skills/releases/tag/v1.0.0
