@@ -167,13 +167,13 @@ For this to work, `acli` must be authenticated (`acli jira auth login --web`) an
 
 | Skill | Plugin trigger | Standalone trigger | Description | Auto-invoked |
 |---|---|---|---|---|
-| auth | `/acli-skills:auth` | `/auth` | Login, logout, check status, or switch Jira and Confluence accounts | No |
+| auth | `/acli-skills:auth` | `/auth` | Login, logout, check status, or switch Jira and Confluence accounts | Yes |
 | search | `/acli-skills:search` | `/search` | Search work items by JQL, list projects, boards, filters, and dashboards | Yes |
 | sprint | `/acli-skills:sprint` | `/sprint` | List, create, and update sprints; show work items in a sprint | Yes |
-| workitem | `/acli-skills:workitem` | `/workitem` | Create, view, edit, transition, assign, comment, link, or clone issues | No |
+| workitem | `/acli-skills:workitem` | `/workitem` | Create, view, edit, transition, assign, comment, link, or clone issues | Yes |
 | atlassian-document-format | `/acli-skills:atlassian-document-format` | `/atlassian-document-format` | Convert Markdown into Atlassian Document Format (ADF) JSON for Jira/Confluence | Yes |
 
-Skills marked "No" use `disable-model-invocation: true` — Claude will not trigger them automatically. `acli-search`, `acli-sprint`, and `atlassian-document-format` are safe to auto-invoke (read-only or pure conversion, no destructive `acli` calls).
+All listed skills can be invoked automatically when relevant.
 
 ### Hooks
 

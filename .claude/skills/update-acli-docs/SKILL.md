@@ -1,7 +1,6 @@
 ---
 name: update-acli-docs
 description: Maintainer workflow for this repo — upgrade the local Atlassian CLI (acli), detect which commands and flags changed, and update docs/, skills/, README, CHANGELOG, and the plugin version to match. Use when acli reports "You're using an outdated version", or the user asks to update acli or refresh the acli documentation.
-disable-model-invocation: true
 argument-hint: "[acli-binary-path]"
 ---
 
