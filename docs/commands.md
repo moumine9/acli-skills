@@ -209,8 +209,6 @@ Quick reference for all available `acli` commands. For flags and examples, see [
 |---|---|
 | `acli feedback` | Submit a request or report a problem to Atlassian |
 
-## acli completion
+## Shell completion
 
-| Command | Description |
-|---|---|
-| `acli completion bash\|fish\|powershell\|zsh` | Generate a shell autocompletion script |
+`acli completion` is no longer available in 1.3.40-stable. Remove calls such as `acli completion powershell` from shell startup files.

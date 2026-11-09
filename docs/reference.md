@@ -2,7 +2,9 @@
 
 `acli` is the Atlassian CLI. It covers Jira Cloud, Confluence Cloud, organization admin tasks, and the Rovo Dev AI coding agent.
 
-Top-level commands: `jira`, `confluence`, `admin`, `auth`, `config`, `rovodev`, `guard`, `feedback`, `completion`
+Verified against `acli` 1.3.40-stable.
+
+Top-level commands: `jira`, `confluence`, `admin`, `auth`, `config`, `rovodev`, `guard`, `feedback`
 
 `guard` (Atlassian Guard CLI) ships as a separate plugin that isn't installed by default — running `acli guard` errors with `Plugin guard not found` until it's installed, so its subcommands aren't documented here.
 
@@ -915,13 +917,9 @@ acli feedback --summary "I have a problem" --details "..." --email "user@atlassi
 
 ---
 
-## acli completion
+## Shell completion
 
-Generate a shell autocompletion script.
-
-```
-acli completion bash|fish|powershell|zsh
-```
+`acli completion` is no longer available in 1.3.40-stable. Remove invocations from shell startup files, such as `acli completion powershell | Out-String | Invoke-Expression` in a PowerShell profile. No replacement completion command is exposed by this version.
 
 ---
 

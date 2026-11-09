@@ -1,4 +1,4 @@
-# acli version 1.3.36-stable
+# acli version 1.3.40-stable
 
 ===== acli 
 Work seamlessly with Atlassian from the command line.
@@ -15,7 +15,6 @@ Available Commands
   rovodev     Atlassian’s AI coding agent: Rovo Dev (Beta).
 
 Additional Commands:
-  completion  Generate the autocompletion script for the specified shell
   config      Commands for changing configuration settings.
   feedback    Submit a request or report a problem.
   help        Help about any command
