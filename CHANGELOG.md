@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.3] - 2026-11-09
+
+### Changed
+
+- Refresh `docs/acli-help.txt` against ACLI 1.3.40-stable and update the command reference and README to match. Jira, Confluence, admin, and authentication commands and flags are unchanged from the 1.3.36-stable baseline; no workflow skill changes are needed. Separately versioned Rovo Dev and Guard plugins were not re-checked.
+
+### Removed
+
+- Remove `acli completion` from the available command list: it is no longer exposed in 1.3.40-stable. Document removal of old shell startup invocations and adjust the documented command count from 106 to 105.
+
 ## [1.1.2] - 2026-11-02
 
 ### Fixed
@@ -62,7 +72,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `.claude/settings.local.json` with pre-approved `acli` permissions, and a `.gitignore` that keeps tokens and credentials out of the repo.
 - README covering acli install, authentication, plugin and manual installation, and local testing with `claude --plugin-dir ./`.
 
-[unreleased]: https://github.com/moumine9/acli-skills/compare/v1.1.2...HEAD
+[unreleased]: https://github.com/moumine9/acli-skills/compare/v1.1.3...HEAD
+[1.1.3]: https://github.com/moumine9/acli-skills/compare/v1.1.2...v1.1.3
 [1.1.2]: https://github.com/moumine9/acli-skills/compare/v1.1.1...v1.1.2
 [1.1.1]: https://github.com/moumine9/acli-skills/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/moumine9/acli-skills/compare/v1.0.0...v1.1.0

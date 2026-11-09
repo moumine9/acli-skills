@@ -4,7 +4,7 @@ Claude Code skills and a hook for managing Jira from the terminal via the Atlass
 
 ## What's in here
 
-Five skills cover the main Jira workflows — authenticating, searching issues and projects, viewing sprint data, creating or editing work items — plus converting Markdown to Atlassian Document Format (ADF) for publishing to Jira or Confluence. A PostToolUse hook watches for authentication errors and tells Claude to offer a fix. A `settings.local.json` file pre-approves the `acli` commands the skills use so you are not prompted on every run. **106 commands** are documented across `docs/commands.md` and `docs/reference.md`.
+Five skills cover the main Jira workflows — authenticating, searching issues and projects, viewing sprint data, creating or editing work items — plus converting Markdown to Atlassian Document Format (ADF) for publishing to Jira or Confluence. A PostToolUse hook watches for authentication errors and tells Claude to offer a fix. A `settings.local.json` file pre-approves the `acli` commands the skills use so you are not prompted on every run. **105 commands** are documented across `docs/commands.md` and `docs/reference.md`, checked against ACLI **1.3.40-stable**.
 
 ## Requirements
 
